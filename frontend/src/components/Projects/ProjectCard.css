@@ -1,0 +1,14 @@
+
+.project-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+  border-radius: 25px;
+  border: 1px solid black;
+}
+
+.project-card:hover {
+  cursor: pointer;
+}
