@@ -25,7 +25,7 @@ def authenticate():
     """
     if current_user.is_authenticated:
         return current_user.to_dict()
-    return {'errors': ['Unauthorized']}
+    return {'errors': ['Unauthorized']}, 401
 
 
 @auth_routes.route('/login', methods=['POST'])
@@ -63,7 +63,7 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
-            username=form.data['username'],
+            name=form.data['name'],
             email=form.data['email'],
             password=form.data['password']
         )
