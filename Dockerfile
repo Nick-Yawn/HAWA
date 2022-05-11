@@ -12,7 +12,7 @@ ENV FLASK_APP=backend
 ENV FLASK_ENV=production
 
 # SQLALCHEMY_ECHO -> Just set it to true
-SQLALCHEMY_ECHO=true
+ENV SQLALCHEMY_ECHO=true
 
 # Set the directory for upcoming commands to /var/www
 WORKDIR /var/www
