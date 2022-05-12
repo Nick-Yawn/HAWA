@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ProjectCard from './ProjectCard';
 import { readProjects } from '../../store/projects';
@@ -16,6 +16,7 @@ export default function Projects() {
 
   return (
     <div className="project-card-container">
+      <ProjectCard />
       {projectsExist && (
         projects.map(project => <ProjectCard project={project} /> )
       )}
