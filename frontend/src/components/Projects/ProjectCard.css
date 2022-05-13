@@ -37,9 +37,12 @@
 
 .selected-project-exit {
   bottom: 0px;
+  opacity: 1;
 }
 
 .selected-project-exit-active {
   bottom: 100vh;
-  transition: bottom 300ms cubic-bezier(1,0.05,1,0);
+  opacity: 0;
+  transition: bottom 300ms cubic-bezier(1,0.05,1,0),
+              opacity 500ms ease-in;
 }
