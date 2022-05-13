@@ -1,5 +1,6 @@
 
 .project-card {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,4 +24,23 @@
 
 .project-card:hover {
   cursor: pointer;
+}
+
+.project-card-enter {
+  opacity: 0;
+}
+
+.project-card-enter-active {
+  opacity: 1;
+  color: red;
+  transition: opacity 200ms;
+}
+
+.project-card-exit {
+  bottom: 0px;
+}
+
+.project-card-exit-active {
+  bottom: 200vh;
+  transition: bottom 500ms cubic-bezier(1,0,1,0);
 }
