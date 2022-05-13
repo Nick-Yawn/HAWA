@@ -9,6 +9,11 @@
   border: 1px solid black;
   transition: width .7s cubic-bezier(0.22, 1, 0.36, 1),
               height .7s cubic-bezier(0.22, 1, 0.36, 1);
+
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--font-color);
+  background-color: var(--nav-bar-bg);
 }
 
 .project-card-active {
