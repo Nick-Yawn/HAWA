@@ -26,21 +26,20 @@
   cursor: pointer;
 }
 
-.project-card-enter {
-  opacity: 0;
-}
-
-.project-card-enter-active {
-  opacity: 1;
-  color: red;
-  transition: opacity 200ms;
-}
-
 .project-card-exit {
-  bottom: 0px;
+  opacity: 1 ;
 }
 
 .project-card-exit-active {
-  bottom: 200vh;
-  transition: bottom 500ms cubic-bezier(1,0,1,0);
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+}
+
+.selected-project-exit {
+  bottom: 0px;
+}
+
+.selected-project-exit-active {
+  bottom: 100vh;
+  transition: bottom 300ms cubic-bezier(1,0.05,1,0);
 }
