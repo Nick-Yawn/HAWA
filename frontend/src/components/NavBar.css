@@ -5,6 +5,7 @@ nav {
   align-items: center;
 /*  border-bottom: 1px solid black;*/
   padding: 12px;
+  box-sizing: border-box;
 
   color: var(--font-color);
   background-color: var(--nav-bar-bg);
