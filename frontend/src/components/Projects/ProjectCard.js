@@ -1,33 +1,42 @@
 import './ProjectCard.css'
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+//import { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 // this component is either simply a link to the single project page, or a form to create a new project
 
 export default function ProjectCard(props) {
-  const { project, projectSelected, setProjectSelected, redirectToProject, formActive, setFormActive } = props;
-  const history = useHistory();
-  const [ selectedCardIsThisCard, setSelectedCardIsThisCard ] = useState(false);
-  const isCreateCard = project === undefined;
+  const { project, 
+          selectedProjectId, 
+          setSelectedProjectId, 
+          projectExecuted,
+          setProjectExecuted,
+          redirectToProject, 
+          formActive, 
+          setFormActive } = props;
+  const isCreateCard   = project === undefined;
+  const isSelectedProject = selectedProjectId === project?.id
 
-  const action = e => {
+  const handleClick = e => {
     if( isCreateCard ){
       setFormActive(!formActive);
+      setSelectedProjectId(null);
+    } else if( !isSelectedProject ){
+      if( formActive ) return;
+      setSelectedProjectId(project.id);
     } else {
-      setSelectedCardIsThisCard(true);
-      setProjectSelected(project.id);
+      setProjectExecuted(true) 
     }
   }
 
-  const className = formActive && isCreateCard ? "project-card project-card-active" : "project-card";
+  let className = formActive && isCreateCard ? "project-card project-card-active" : "project-card";
+  if( isSelectedProject ) className += " project-selected";
 
   return (
-    <CSSTransition  in={(!projectSelected && !formActive) || (isCreateCard && formActive)} 
+    <CSSTransition  in={(!projectExecuted && !formActive) || (isCreateCard && formActive)} 
                     timeout={500} 
                     onExited={redirectToProject} 
-                    classNames={selectedCardIsThisCard ? "selected-project" : "project-card"}>
-      <div className={className} onClick={action}>
+                    classNames={isSelectedProject ? "selected-project" : "project-card"}> 
+      <div className={className} onClick={handleClick}>
         {project?.title || "Start a Project"}
       </div>
     </CSSTransition>

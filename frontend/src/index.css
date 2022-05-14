@@ -21,4 +21,5 @@ body {
   --global-blur: blur(5px);
   --nav-bar-bg: rgba(0,0,0,.5);
   --font-color: white;
+  --my-cubic-bezier: cubic-bezier(0.22,1,.36,1);
 }
