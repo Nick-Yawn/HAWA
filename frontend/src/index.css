@@ -7,6 +7,7 @@ html {
 body {
   height: 100%;
   margin: 0;
+  background-image: linear-gradient(to right bottom, #00ffff, #00dcff, #00b6ff, #008cff, #005be0, #0145d2, #122cc3, #2003b2, #2f05bd, #3d08c9, #4a0cd4, #560fe0);
 }
 
 #root {
@@ -14,4 +15,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: Lato, sans-serif; 
+  overflow-x: hidden;
+
+  --global-blur: blur(5px);
+  --nav-bar-bg: rgba(0,0,0,.5);
+  --font-color: white;
+  --my-cubic-bezier: cubic-bezier(0.22,1,.36,1);
 }

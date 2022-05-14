@@ -4,4 +4,10 @@
   display: flex;
   align-items: center;
   gap: 25px;
+/*
+  min-width: 100%;
+  justify-content: center;
+*/
+  transition: margin-left 700ms var(--my-cubic-bezier);
 }
+

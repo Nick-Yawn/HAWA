@@ -5,6 +5,7 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import Projects from './components/Projects';
+import Project from './components/Projects/Project';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 
@@ -36,11 +37,11 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path='/projects' exact={true} >
+        <ProtectedRoute path='/projects' exact={true}>
           <Projects />
         </ProtectedRoute>
-        <ProtectedRoute path='/projects/:project_id' exact={true} >
-          <h1>one project</h1>
+        <ProtectedRoute path='/projects/:project_id' exact={true}>
+          <Project />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

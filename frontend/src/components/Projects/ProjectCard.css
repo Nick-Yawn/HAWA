@@ -1,5 +1,6 @@
 
 .project-card {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,8 +8,64 @@
   width: 200px;
   border-radius: 25px;
   border: 1px solid black;
+  transition: width 700ms var(--my-cubic-bezier),
+              height 700ms var(--my-cubic-bezier);
+
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--font-color);
+  background-color: var(--nav-bar-bg);
+}
+
+.project-card-active {
+  width: 800px;
+  height: 120px;
+}
+
+.project-selected {
+  border: 1px solid cyan;
 }
 
 .project-card:hover {
   cursor: pointer;
+}
+
+
+.project-card-enter {
+  opacity: 0;
+}
+
+.project-card-enter-active {
+  opacity: 1;
+  transition: opacity 500ms var(--my-cubic-bezier) /*ease-in;*/
+}
+
+.project-card-exit {
+  opacity: 1 ;
+}
+
+.project-card-exit-active {
+  opacity: 0;
+  transition: opacity 500ms var(--my-cubic-bezier);/*ease-in;*/
+}
+
+.selected-project-exit {
+  bottom: 0px;
+  opacity: 1;
+  height: 200px;
+}
+
+.selected-project-exit-active {
+  bottom: 100vh;
+  opacity: 0;
+  transition: bottom 300ms cubic-bezier(1,0.05,.9,0),
+              opacity 400ms ease-in;
+}
+
+.project-card-exit-done {
+  opacity: 0;
+}
+
+.project-card-exit-done:hover {
+  cursor: default;
 }
