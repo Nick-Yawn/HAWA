@@ -84,3 +84,7 @@
 .project-card-exit-done:hover {
   cursor: default;
 }
+
+.new-project-card {
+  opacity: 0;
+}

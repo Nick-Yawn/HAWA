@@ -47,14 +47,18 @@ export default function ProjectCard(props) {
     const newProject = await dispatch(postProject({title})) 
 
     if( newProject.id ){
-      setSelectedProjectId(newProject.id);
       setFormSubmitted(true);
+      setSelectedProjectId(newProject.id);
     }  
   }
 
   const handleDelete = async e => {
     //TODO: add confirmation modal
     dispatch(deleteProject(project.id))
+  }
+
+  const editButtonFunc = async e => {
+     
   }
 
   const handleKeyDown = e => {
@@ -80,14 +84,19 @@ export default function ProjectCard(props) {
   let divClassName = formActive && isCreateCard ? "project-card project-card-active" : "project-card";
   if( isSelectedProject ) divClassName += " project-selected";
 
+  let animationClassName = isSelectedProject ? "selected-project" : "project-card";
+
+  let containerClassName = "card-and-controls-container"
+  if( isSelectedProject && formActive ) containerClassName += " new-project-card"
+
   return (
-    <div className="card-and-controls-container">
+    <div className={containerClassName}>
       <CSSTransition  in={(isMounted && !projectExecuted && !formActive) || 
                           (isCreateCard && formActive && !formSubmitted)} 
                     appear={true}
                     timeout={500} 
                     onExited={redirectToProject} 
-                    classNames={isSelectedProject ? "selected-project" : "project-card"}>
+                    classNames={animationClassName}>
 
         <div className={divClassName} onClick={handleClick}>
           {project?.title  || formActive || "Start a Project"}
