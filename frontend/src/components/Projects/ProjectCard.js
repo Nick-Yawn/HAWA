@@ -52,6 +52,10 @@ export default function ProjectCard(props) {
     }  
   }
 
+  const handleKeyDown = e => {
+    if(e.key === "Escape") setFormActive(false); 
+  };
+
   const handleClick = e => {
     e.stopPropagation()
     if( isCreateCard ){
@@ -81,7 +85,7 @@ export default function ProjectCard(props) {
         {project?.title  || formActive || "Start a Project"}
         {formActive && isCreateCard && (
           <form onSubmit={handleSubmit}>
-            <input type="text" ref={inputRef} value={title} onChange={updateTitle} />
+            <input type="text" ref={inputRef} value={title} onChange={updateTitle} onKeyDown={handleKeyDown} />
           </form>
         )}
       </div>
