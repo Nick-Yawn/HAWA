@@ -20,5 +20,6 @@ class Project(db.Model):
             'title': self.title,
             'repo_link': self.repo_link,
             'site_link': self.site_link,
+            'user_id': self.user_id,
             'created_at': self.created_at
                 }
