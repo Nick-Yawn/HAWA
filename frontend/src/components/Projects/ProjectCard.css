@@ -19,10 +19,6 @@
   user-select: none;
 }
 
-.project-card-active {
-  width: 800px;
-  height: 120px;
-}
 
 .project-selected {
   border: 1px solid cyan;
@@ -32,6 +28,14 @@
   cursor: pointer;
 }
 
+.project-card-active {
+  width: 800px;
+  height: 120px;
+}
+
+.project-card-active:hover {
+  cursor: default;
+}
 
 .project-card-enter {
   opacity: 0;

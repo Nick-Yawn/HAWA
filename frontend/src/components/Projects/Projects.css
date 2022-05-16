@@ -11,3 +11,11 @@
   transition: margin-left 700ms var(--my-cubic-bezier);
 }
 
+.project-card-container-freeze-animation {
+  transition: none;
+}
+
+.project-card-container-form-active:hover {
+  cursor: pointer;
+}
+

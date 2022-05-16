@@ -20,11 +20,12 @@ const generateOffset = (projects, selectedProjectId) => {
 export default function Projects() {
   const dispatch = useDispatch();
   const history  = useHistory();
-  const [ selectedProjectId, setSelectedProjectId] = useState(null);
-  const [ projectExecuted, setProjectExecuted ] = useState(false);
-  const [ formActive, setFormActive ] = useState(false);
-  const [ loadingComplete, setLoadingComplete ] = useState(false);
-  const projects = useSelector(state => state.projects)
+  const [ selectedProjectId, setSelectedProjectId]  = useState(null);
+  const [ projectExecuted, setProjectExecuted ]     = useState(false);
+  const [ formActive, setFormActive ]               = useState(false);
+  const [ formSubmitted, setFormSubmitted ]         = useState(false);
+  const [ loadingComplete, setLoadingComplete ]     = useState(false);
+  const projects      = useSelector(state => state.projects)
   const projectsExist = projects?.length > 0; 
 
   useEffect(() => {
@@ -35,9 +36,9 @@ export default function Projects() {
     func();
   }, [dispatch])
 
-  const redirectToProject = () => {
-    if( !formActive )
-      history.push(`/projects/${selectedProjectId}`)
+  const redirectToProject = () => { 
+    if( !formActive || formSubmitted ) 
+      history.push(`/projects/${selectedProjectId}`) 
   };
 
   // this is for centering the currently active card
@@ -50,13 +51,18 @@ export default function Projects() {
     xoffset = generateOffset(projects, -1); //TODO: make this last edited project
   }
 
-  // the first card is not provided a project prop and therefore becomes the new project form
+  const closeForm = e => { if(formActive) setFormActive(false) };
 
+  let className = "project-card-container";
+  if( formActive )    className += " project-card-container-form-active"  // for cursor:hover on bg
+  if( formSubmitted ) className += " project-card-container-freeze-animation" // fixes wiggle on submit
+
+  // the first card is not provided a project prop and therefore becomes the new project form
   if( !loadingComplete ){
     return null
   } else {
     return (
-      <div  className="project-card-container"
+      <div  className={className} onClick={closeForm}
         style={{marginLeft: xoffset}}>
         <ProjectCard  selectedProjectId={selectedProjectId} 
                       setSelectedProjectId={setSelectedProjectId}
@@ -65,9 +71,11 @@ export default function Projects() {
                       setFormActive={setFormActive}
                       projectExecuted={projectExecuted}
                       setProjectExecuted={setProjectExecuted}
+                      formSubmitted={formSubmitted}
+                      setFormSubmitted={setFormSubmitted}
                       />
         {projectsExist && (
-          projects.map(project => 
+          projects.map((project, i) => 
             <ProjectCard  project={project} 
                           selectedProjectId={selectedProjectId} 
                           setSelectedProjectId={setSelectedProjectId}
@@ -76,6 +84,7 @@ export default function Projects() {
                           setFormActive={setFormActive}
                           projectExecuted={projectExecuted}
                           setProjectExecuted={setProjectExecuted}
+                          key={i}
                           /> 
         ))}
       </div>
