@@ -62,8 +62,9 @@ export default function Projects() {
     return null
   } else {
     return (
-      <div  className={className} onClick={closeForm}
-        style={{marginLeft: xoffset}}>
+      <div  className={className} 
+            onClick={closeForm}
+            style={{marginLeft: xoffset}}>
         <ProjectCard  selectedProjectId={selectedProjectId} 
                       setSelectedProjectId={setSelectedProjectId}
                       redirectToProject={redirectToProject}
