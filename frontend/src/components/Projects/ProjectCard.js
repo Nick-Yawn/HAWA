@@ -2,7 +2,7 @@ import './ProjectCard.css'
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux'
 import { CSSTransition } from 'react-transition-group';
-import { postProject } from '../../store/projects'; 
+import { postProject, deleteProject } from '../../store/projects'; 
 
 // this component is either simply a link to the single project page, or a form to create a new project
 //    as this grows, I am struck by the thought that I should have made this two separate components
@@ -53,7 +53,8 @@ export default function ProjectCard(props) {
   }
 
   const handleDelete = async e => {
-
+    //TODO: add confirmation modal
+    dispatch(deleteProject(project.id))
   }
 
   const handleKeyDown = e => {
