@@ -52,6 +52,10 @@ export default function ProjectCard(props) {
     }  
   }
 
+  const handleDelete = async e => {
+
+  }
+
   const handleKeyDown = e => {
     if(e.key === "Escape") setFormActive(false); 
   };
@@ -76,19 +80,31 @@ export default function ProjectCard(props) {
   if( isSelectedProject ) divClassName += " project-selected";
 
   return (
-    <CSSTransition  in={(isMounted && !projectExecuted && !formActive) || (isCreateCard && formActive && !formSubmitted)} 
+    <div className="card-and-controls-container">
+      <CSSTransition  in={(isMounted && !projectExecuted && !formActive) || 
+                          (isCreateCard && formActive && !formSubmitted)} 
                     appear={true}
                     timeout={500} 
                     onExited={redirectToProject} 
-                    classNames={isSelectedProject ? "selected-project" : "project-card"}> 
-      <div className={divClassName} onClick={handleClick}>
-        {project?.title  || formActive || "Start a Project"}
-        {formActive && isCreateCard && (
-          <form onSubmit={handleSubmit}>
-            <input type="text" ref={inputRef} value={title} onChange={updateTitle} onKeyDown={handleKeyDown} />
-          </form>
-        )}
-      </div>
-    </CSSTransition>
+                    classNames={isSelectedProject ? "selected-project" : "project-card"}>
+
+        <div className={divClassName} onClick={handleClick}>
+          {project?.title  || formActive || "Start a Project"}
+          {formActive && isCreateCard && (
+            <form onSubmit={handleSubmit}>
+              <input type="text" ref={inputRef} value={title} onChange={updateTitle} onKeyDown={handleKeyDown} />
+            </form>
+          )}
+        </div >
+      </CSSTransition>
+      {/*TODO: add CSSTransition to these buttons*/}
+      { !isCreateCard && isSelectedProject && (
+        <>
+          <button onClick={handleClick}> Enter </button>
+          <button> Edit </button>
+          <button onClick={handleDelete}> Delete </button>
+        </>
+      )}
+    </div>
   )
 }

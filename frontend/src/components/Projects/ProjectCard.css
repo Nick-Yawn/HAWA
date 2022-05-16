@@ -21,8 +21,16 @@
 }
 
 
+.card-and-controls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
 .project-selected {
   border: 1px solid cyan;
+  margin-top: 138px;
 }
 
 .project-card:hover {
