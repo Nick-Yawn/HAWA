@@ -65,12 +65,12 @@ export const deleteProject = projectId => async dispatch => {
 }
 
 export default function projects(state = [], action) {
-  const newState = [...state];
+  let newState = [...state];
   switch( action.type ){
     case GET_PROJECTS:
       return [ ...action.projects ]
     case POST_PROJECT:
-      return [...newState, action.project]
+      newState = [...newState, action.project]
       return newState;
     case DELETE_PROJECT:
       const projectIndex = newState.findIndex(project => project.id === +action.project.id);
