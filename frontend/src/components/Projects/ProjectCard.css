@@ -25,13 +25,20 @@
 .card-and-controls-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 25px;
 }
 
 .project-selected {
   border: 1px solid cyan;
-  margin-top: 138px; /* offset for buttons */
+  transition: border 500ms var(--my-cubic-bezier),
+              width 700ms var(--my-cubic-bezier),
+              height 700ms var(--my-cubic-bezier);
+}
+
+.buttons-offset {
+  margin-top: 113px;
 }
 
 .project-card:hover {
@@ -41,7 +48,6 @@
 .project-card-active {
   width: 800px;
   height: 120px;
-  margin-top: 0px;
   /* ADD CANCELLATION OF WHATEVER SELECTED IS*/
 }
 
@@ -67,6 +73,10 @@
   transition: opacity 500ms var(--my-cubic-bezier);/*ease-in;*/
 }
 
+.project-card-exit-active:hover {
+  cursor: default;
+}
+
 .selected-project-exit {
   bottom: 0px;
   opacity: 1;
@@ -89,5 +99,47 @@
 }
 
 .new-project-card {
+  opacity: 0;
+}
+
+.project-card-buttons-container {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+
+.project-control-buttons-enter {
+  opacity: 0;
+}
+
+.project-control-buttons-enter-active {
+  opacity: 1;
+  transition: opacity 500ms var(--my-cubic-bezier) /*ease-in;*/
+}
+
+.project-control-buttons-enter-active > button:hover {
+  cursor: pointer;
+}
+
+.project-control-buttons-enter-done {
+  opacity: 1;
+}
+
+.project-control-buttons-enter-done > button:hover {
+  cursor: pointer;
+}
+
+.project-control-buttons-exit {
+  opacity: 1;
+}
+
+.project-control-buttons-exit-active {
+  opacity: 0;
+  transition: opacity 500ms var(--my-cubic-bezier);/*ease-in;*/
+}
+
+.project-control-buttons-exit-done {
   opacity: 0;
 }

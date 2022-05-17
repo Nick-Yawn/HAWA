@@ -27,6 +27,14 @@ export default function ProjectCard(props) {
   const inputRef = useRef(null);
   const editRef = useRef(null);
 
+  const cardActive =  (isMounted && !projectExecuted && !formActive && !editActive) || // default cards
+                      (isCreateCard && formActive && !formSubmitted) || // create form
+                      (isSelectedProject && editActive); // edit form
+
+  const buttonsActive = !isCreateCard && isSelectedProject && !editActive;
+
+
+  // useEffect hooks
   // this just ensures that the enter animations proc
   useEffect(()=>{
     setIsMounted(true);
@@ -49,22 +57,31 @@ export default function ProjectCard(props) {
     }
   },[editActive, isSelectedProject])
 
+
+  // event handlers
   const handleSubmit = async e => {
     e.preventDefault();
     if( title.trim() === '' ) return;// TODO: validation message or color change of some kind
-    const newProject = await dispatch(postProject({title})) 
+    const newProject = await dispatch(postProject({title: title.trim()})) 
     if( newProject.id ){
       setFormSubmitted(true);
       setSelectedProjectId(newProject.id);
     }  
   }
 
-  const handleDelete = async e => {
+  const enterButtonFunc = async e => {
+    if( !isSelectedProject || editActive ) return;
+    handleClick(e);
+  }
+
+  const deleteButtonFunc = async e => {
     //TODO: add confirmation modal
+    if( !isSelectedProject || editActive ) return;
     dispatch(deleteProject(project.id))
   }
 
   const editButtonFunc = e => {
+    if( !isSelectedProject || editActive ) return;
     e.stopPropagation();
     setEditActive(true); 
   }
@@ -78,11 +95,15 @@ export default function ProjectCard(props) {
   }
 
   const handleKeyDown = e => {
-    if(e.key === "Escape") setFormActive(false); 
+    if(e.key === "Escape") {
+      setFormActive(false); 
+      setEditActive(false);
+    }
   };
 
   const handleClick = e => {
-    e.stopPropagation()
+    if( !cardActive ) return;
+    e.stopPropagation();
     if( isCreateCard ){
       if( projectExecuted ) return; //prevents cancelling enter-project animation
       if(!formActive) setFormActive(true);
@@ -97,8 +118,12 @@ export default function ProjectCard(props) {
     }
   }
 
+  
+  // controlled input
   const updateTitle = e => setTitle(e.target.value);
 
+
+  // various classNames
   let divClassName = "project-card";
   if( formActive && isCreateCard ) divClassName += " project-card-active";
   if( isSelectedProject && editActive ) divClassName += " project-card-active";
@@ -111,15 +136,13 @@ export default function ProjectCard(props) {
 
   return (
     <div className={containerClassName}>
-      <CSSTransition  in={(isMounted && !projectExecuted && !formActive && !editActive) || // default cards
-                          (isCreateCard && formActive && !formSubmitted) || // create form
-                          (isSelectedProject && editActive)} // edit form
-                    appear={true}
-                    timeout={500} 
-                    onExited={redirectToProject} 
-                    classNames={animationClassName}>
+      <CSSTransition  in={cardActive}
+                      appear={true}
+                      timeout={500} 
+                      onExited={redirectToProject} 
+                      classNames={animationClassName}>
 
-        <div className={divClassName} onClick={handleClick}>
+        <div className={divClassName} onClick={handleClick} >
           { editActive || project?.title  || formActive || "Start a Project"}
           {formActive && isCreateCard && (
             <form onSubmit={handleSubmit}>
@@ -133,14 +156,15 @@ export default function ProjectCard(props) {
           )}
         </div >
       </CSSTransition>
-      {/*TODO: add CSSTransition to these buttons*/}
-      { !isCreateCard && isSelectedProject && !editActive && (
-        <>
-          <button onClick={handleClick}> Enter </button>
-          <button onClick={editButtonFunc}> Edit </button>
-          <button onClick={handleDelete}> Delete </button>
-        </>
-      )}
+      <CSSTransition  in={buttonsActive}
+                      timeout={500}
+                      classNames="project-control-buttons">
+          <div className="project-card-buttons-container">
+            <button onClick={enterButtonFunc}> Enter </button>
+            <button onClick={editButtonFunc}> Edit </button>
+            <button onClick={deleteButtonFunc}> Delete </button>
+          </div>
+      </CSSTransition>
     </div>
   )
 }

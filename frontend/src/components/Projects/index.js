@@ -39,9 +39,9 @@ export default function Projects() {
   }, [dispatch])
 
   useEffect(() => {
-    if(selectedProjectId)
+    if(selectedProjectId || formActive)
       setLastSelectedId(selectedProjectId);
-  },[selectedProjectId]) 
+  },[selectedProjectId, formActive]) 
 
   const redirectToProject = () => { 
     if( !formActive && !editActive || formSubmitted ) 
@@ -78,36 +78,36 @@ export default function Projects() {
     return (
       <div  onClick={handleBackgroundClick}
             className="projects-bg">
-      <div  className={className} 
-            style={{marginLeft: xoffset}}>
-        <ProjectCard  selectedProjectId={selectedProjectId} 
-                      setSelectedProjectId={setSelectedProjectId}
-                      redirectToProject={redirectToProject}
-                      formActive={formActive}
-                      setFormActive={setFormActive}
-                      projectExecuted={projectExecuted}
-                      setProjectExecuted={setProjectExecuted}
-                      formSubmitted={formSubmitted}
-                      setFormSubmitted={setFormSubmitted}
-                      editActive={editActive}
-                      setEditActive={setEditActive}
-                      />
-        {projectsExist && (
-          projects.map((project, i) => 
-            <ProjectCard  project={project} 
-                          selectedProjectId={selectedProjectId} 
-                          setSelectedProjectId={setSelectedProjectId}
-                          redirectToProject={redirectToProject}
-                          formActive={formActive}
-                          setFormActive={setFormActive}
-                          projectExecuted={projectExecuted}
-                          setProjectExecuted={setProjectExecuted}
-                          editActive={editActive}
-                          setEditActive={setEditActive}
-                          key={i}
-                          /> 
-        ))}
-      </div>
+        <div  className={className} 
+              style={{marginLeft: xoffset}}>
+          <ProjectCard  selectedProjectId={selectedProjectId} 
+                        setSelectedProjectId={setSelectedProjectId}
+                        redirectToProject={redirectToProject}
+                        formActive={formActive}
+                        setFormActive={setFormActive}
+                        projectExecuted={projectExecuted}
+                        setProjectExecuted={setProjectExecuted}
+                        formSubmitted={formSubmitted}
+                        setFormSubmitted={setFormSubmitted}
+                        editActive={editActive}
+                        setEditActive={setEditActive}
+                        />
+          {projectsExist && (
+            projects.map((project, i) => 
+              <ProjectCard  project={project} 
+                            selectedProjectId={selectedProjectId} 
+                            setSelectedProjectId={setSelectedProjectId}
+                            redirectToProject={redirectToProject}
+                            formActive={formActive}
+                            setFormActive={setFormActive}
+                            projectExecuted={projectExecuted}
+                            setProjectExecuted={setProjectExecuted}
+                            editActive={editActive}
+                            setEditActive={setEditActive}
+                            key={i}
+                            /> 
+          ))}
+        </div>
       </div>
     )
   }
