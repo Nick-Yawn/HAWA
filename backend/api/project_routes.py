@@ -23,7 +23,7 @@ def post_project():
         project = Project( title=form.data['title'], user_id=current_user.id)
         db.session.add(project)
         db.session.commit()
-        return project.to_dict();
+        return project.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 # delete
@@ -39,6 +39,20 @@ def delete_project(id):
     db.session.commit()
 
     return {'id':id, 'message':'delete successful'}
+
+# update
+@project_routes.route('/<int:id>', methods = ['PUT'])
+@login_required
+def update_project(id):
+    project = Project.query.get(id)
+
+    if project.user_id != current_user.id:
+        return {'errors': ["Access Denied"]}, 403
+
+    project.title = request.json['title'] 
+
+    db.session.commit()
+    return project.to_dict()
 
 @project_routes.errorhandler(500)
 def internal_server_error(e):
