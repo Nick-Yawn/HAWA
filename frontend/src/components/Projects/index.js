@@ -52,11 +52,13 @@ export default function Projects() {
     xoffset = generateOffset(projects, -1); //TODO: make this last edited project
   }
 
-  const closeForm = e => { 
+  const handleBackgroundClick = e => { 
     if(formActive) 
       setFormActive(false);
     if(editActive)
       setEditActive(false);
+    //if(selectedProjectId)
+      //setSelectedProjectId(null);
   };
 
   let className = "project-card-container";
@@ -68,8 +70,9 @@ export default function Projects() {
     return null
   } else {
     return (
+      <div  onClick={handleBackgroundClick}
+            className="projects-bg">
       <div  className={className} 
-            onClick={closeForm}
             style={{marginLeft: xoffset}}>
         <ProjectCard  selectedProjectId={selectedProjectId} 
                       setSelectedProjectId={setSelectedProjectId}
@@ -98,6 +101,7 @@ export default function Projects() {
                           key={i}
                           /> 
         ))}
+      </div>
       </div>
     )
   }

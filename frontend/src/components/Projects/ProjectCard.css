@@ -7,6 +7,7 @@
   height: 200px;
   width: 200px;
   border-radius: 25px;
+  padding: 16px;
   box-sizing: border-box;
   border: 1px solid black;
   transition: width 700ms var(--my-cubic-bezier),
@@ -30,7 +31,7 @@
 
 .project-selected {
   border: 1px solid cyan;
-  margin-top: 122px; /* offset for buttons */
+  margin-top: 136px; /* offset for buttons */
 }
 
 .project-card:hover {

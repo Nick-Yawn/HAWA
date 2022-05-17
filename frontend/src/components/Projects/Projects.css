@@ -1,4 +1,12 @@
 
+.projects-bg {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .project-card-container {
   flex: auto;
   display: flex;
@@ -14,8 +22,3 @@
 .project-card-container-freeze-animation {
   transition: none;
 }
-
-.project-card-container-form-active:hover {
-  cursor: pointer;
-}
-
