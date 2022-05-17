@@ -61,6 +61,7 @@ export default function Projects() {
   }
 
   const handleBackgroundClick = e => { 
+    if(projectExecuted) return;
     if(formActive) 
       setFormActive(false);
     if(editActive)
