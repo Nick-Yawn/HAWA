@@ -33,6 +33,7 @@ export default function Projects() {
 
   projects.sort((a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) );
 
+  // initial read
   useEffect(() => {
     const func = async () => {
       await dispatch(readProjects())
@@ -41,28 +42,13 @@ export default function Projects() {
     func();
   }, [dispatch])
 
+  // track lastSelectedId, not currently in use
   useEffect(() => {
     if(selectedProjectId || formActive)
       setLastSelectedId(selectedProjectId);
   },[selectedProjectId, formActive]) 
 
-  const redirectToProject = () => { 
-    if( !formActive && !editActive || formSubmitted ) 
-      history.push(`/projects/${selectedProjectId}`) 
-  };
-
-  // this is for centering the currently active card
-  /*
-  let xoffset = "0px";
-  if( formActive ){
-    xoffset = projects.length * ( 200 + 25 ) + "px"; 
-  } else if( selectedProjectId ){
-    xoffset = generateOffset(projects, selectedProjectId);
-  } else if( !selectedProjectId ){
-    xoffset = generateOffset(projects, lastSelectedId || -1); //TODO: make this last edited project
-  }
-  */
-
+  // this is for centering the currently active card / form
   useEffect(()=>{
     if( formActive ){
       setXOffset(projects.length * (200 + 25));
@@ -73,6 +59,13 @@ export default function Projects() {
     }
   },[formActive, selectedProjectId, editActive])
 
+  // fired on ProjectCard exit animation end
+  const redirectToProject = () => { 
+    if( !formActive && !editActive || formSubmitted ) 
+      history.push(`/projects/${selectedProjectId}`) 
+  };
+
+  // closes forms and unselects cards
   const handleBackgroundClick = e => { 
     if(projectExecuted) return;
     if(formActive) 
@@ -83,11 +76,14 @@ export default function Projects() {
       setSelectedProjectId(null);
   };
 
+  // scroll function
   const handleWheel = e => {
     if(!formActive && !editActive)
       setXOffset(prev => prev - e.deltaY * 3)
   }
 
+
+  // classNames
   let className = "project-card-container";
   if( formActive || editActive )    className += " project-card-container-form-active"  // for cursor:hover on bg
   if( formSubmitted ) className += " project-card-container-freeze-animation" // fixes wiggle on submit
