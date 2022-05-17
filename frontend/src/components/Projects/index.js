@@ -66,7 +66,7 @@ export default function Projects() {
       setFormActive(false);
     if(editActive)
       setEditActive(false);
-    if(selectedProjectId)
+    else if(selectedProjectId)
       setSelectedProjectId(null);
   };
 
