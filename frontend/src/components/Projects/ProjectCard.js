@@ -31,7 +31,7 @@ export default function ProjectCard(props) {
                       (isCreateCard && formActive && !formSubmitted) || // create form
                       (isSelectedProject && editActive); // edit form
 
-  const buttonsActive = !isCreateCard && isSelectedProject && !editActive;
+  const buttonsActive = !isCreateCard && isSelectedProject && !editActive && !projectExecuted;
 
 
   // useEffect hooks
