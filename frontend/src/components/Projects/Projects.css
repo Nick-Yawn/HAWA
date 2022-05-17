@@ -4,18 +4,15 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .project-card-container {
-  flex: auto;
   display: flex;
   align-items: center;
   gap: 25px;
-/*
-  min-width: 100%;
-  justify-content: center;
-*/
+  margin-top: 136px; /*button offset*/
   transition: margin-left 700ms var(--my-cubic-bezier);
 }
 
