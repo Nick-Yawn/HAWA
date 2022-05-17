@@ -21,6 +21,7 @@ export default function Projects() {
   const dispatch = useDispatch();
   const history  = useHistory();
   const [ selectedProjectId, setSelectedProjectId]  = useState(null);
+  const [ lastSelectedId, setLastSelectedId]        = useState(null);
   const [ projectExecuted, setProjectExecuted ]     = useState(false);
   const [ formActive, setFormActive ]               = useState(false);
   const [ editActive, setEditActive ]               = useState(false);
@@ -37,6 +38,11 @@ export default function Projects() {
     func();
   }, [dispatch])
 
+  useEffect(() => {
+    if(selectedProjectId)
+      setLastSelectedId(selectedProjectId);
+  },[selectedProjectId]) 
+
   const redirectToProject = () => { 
     if( !formActive && !editActive || formSubmitted ) 
       history.push(`/projects/${selectedProjectId}`) 
@@ -49,7 +55,7 @@ export default function Projects() {
   } else if( selectedProjectId ){
     xoffset = generateOffset(projects, selectedProjectId);
   } else if( !selectedProjectId ){
-    xoffset = generateOffset(projects, -1); //TODO: make this last edited project
+    xoffset = generateOffset(projects, lastSelectedId || -1); //TODO: make this last edited project
   }
 
   const handleBackgroundClick = e => { 
@@ -57,8 +63,8 @@ export default function Projects() {
       setFormActive(false);
     if(editActive)
       setEditActive(false);
-    //if(selectedProjectId)
-      //setSelectedProjectId(null);
+    if(selectedProjectId)
+      setSelectedProjectId(null);
   };
 
   let className = "project-card-container";

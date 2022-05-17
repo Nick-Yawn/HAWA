@@ -31,7 +31,7 @@
 
 .project-selected {
   border: 1px solid cyan;
-  margin-top: 136px; /* offset for buttons */
+  margin-top: 138px; /* offset for buttons */
 }
 
 .project-card:hover {

@@ -65,6 +65,7 @@ export default function ProjectCard(props) {
   }
 
   const editButtonFunc = e => {
+    e.stopPropagation();
     setEditActive(true); 
   }
 
