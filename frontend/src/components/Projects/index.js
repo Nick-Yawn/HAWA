@@ -23,6 +23,7 @@ export default function Projects() {
   const [ selectedProjectId, setSelectedProjectId]  = useState(null);
   const [ projectExecuted, setProjectExecuted ]     = useState(false);
   const [ formActive, setFormActive ]               = useState(false);
+  const [ editActive, setEditActive ]               = useState(false);
   const [ formSubmitted, setFormSubmitted ]         = useState(false);
   const [ loadingComplete, setLoadingComplete ]     = useState(false);
   const projects      = useSelector(state => state.projects)
@@ -37,7 +38,7 @@ export default function Projects() {
   }, [dispatch])
 
   const redirectToProject = () => { 
-    if( !formActive || formSubmitted ) 
+    if( !formActive && !editActive || formSubmitted ) 
       history.push(`/projects/${selectedProjectId}`) 
   };
 
@@ -51,10 +52,15 @@ export default function Projects() {
     xoffset = generateOffset(projects, -1); //TODO: make this last edited project
   }
 
-  const closeForm = e => { if(formActive) setFormActive(false) };
+  const closeForm = e => { 
+    if(formActive) 
+      setFormActive(false);
+    if(editActive)
+      setEditActive(false);
+  };
 
   let className = "project-card-container";
-  if( formActive )    className += " project-card-container-form-active"  // for cursor:hover on bg
+  if( formActive || editActive )    className += " project-card-container-form-active"  // for cursor:hover on bg
   if( formSubmitted ) className += " project-card-container-freeze-animation" // fixes wiggle on submit
 
   // the first card is not provided a project prop and therefore becomes the new project form
@@ -74,6 +80,8 @@ export default function Projects() {
                       setProjectExecuted={setProjectExecuted}
                       formSubmitted={formSubmitted}
                       setFormSubmitted={setFormSubmitted}
+                      editActive={editActive}
+                      setEditActive={setEditActive}
                       />
         {projectsExist && (
           projects.map((project, i) => 
@@ -85,6 +93,8 @@ export default function Projects() {
                           setFormActive={setFormActive}
                           projectExecuted={projectExecuted}
                           setProjectExecuted={setProjectExecuted}
+                          editActive={editActive}
+                          setEditActive={setEditActive}
                           key={i}
                           /> 
         ))}

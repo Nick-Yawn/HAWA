@@ -30,7 +30,7 @@
 
 .project-selected {
   border: 1px solid cyan;
-  margin-top: 138px;
+  margin-top: 122px; /* offset for buttons */
 }
 
 .project-card:hover {
@@ -40,6 +40,8 @@
 .project-card-active {
   width: 800px;
   height: 120px;
+  margin-top: 0px;
+  /* ADD CANCELLATION OF WHATEVER SELECTED IS*/
 }
 
 .project-card-active:hover {
