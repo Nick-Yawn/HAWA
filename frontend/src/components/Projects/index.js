@@ -30,6 +30,8 @@ export default function Projects() {
   const projects      = useSelector(state => state.projects)
   const projectsExist = projects?.length > 0; 
 
+  projects.sort((a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) );
+
   useEffect(() => {
     const func = async () => {
       await dispatch(readProjects())
