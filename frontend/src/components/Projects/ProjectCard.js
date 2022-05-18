@@ -22,23 +22,15 @@ export default function ProjectCard(props) {
   const dispatch = useDispatch();
   const isCreateCard      = project === undefined;
   const isSelectedProject = selectedProjectId === project?.id
-  const [isMounted, setIsMounted] = useState(false);
   const [title, setTitle] = useState('')
   const inputRef = useRef(null);
   const editRef = useRef(null);
 
-  const cardActive =  (isMounted && !projectExecuted && !formActive && !editActive) || // default cards
+  const cardActive =  (!projectExecuted && !formActive && !editActive) || // default cards
                       (isCreateCard && formActive && !formSubmitted) || // create form
                       (isSelectedProject && editActive); // edit form
 
   const buttonsActive = !isCreateCard && isSelectedProject && !editActive && !projectExecuted;
-
-
-  // useEffect hooks
-  // this just ensures that the enter animations proc
-  useEffect(()=>{
-    setIsMounted(true);
-  },[])
 
   //  this useEffect is required because the input doesn't mount until
   //    after the formActive variable is set to true, so if we try to

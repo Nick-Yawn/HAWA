@@ -48,14 +48,25 @@
   cursor: pointer;
 }
 
+/* for edit or create forms */
 .project-card-active {
   width: 800px;
   height: 120px;
-  /* ADD CANCELLATION OF WHATEVER SELECTED IS*/
+  /* ADD CANCELLATION OF WHATEVER SELECTED IS ?*/
 }
 
 .project-card-active:hover {
   cursor: default;
+}
+
+/* standard project cards */
+.project-card-appear {
+  opacity: 0;
+}
+
+.project-card-appear-active {
+  opacity: 1;
+  transition: opacity 500ms var(--my-cubic-bezier) /*ease-in;*/
 }
 
 .project-card-enter {
@@ -80,6 +91,15 @@
   cursor: default;
 }
 
+.project-card-exit-done {
+  opacity: 0;
+}
+
+.project-card-exit-done:hover {
+  cursor: default;
+}
+
+/* Executed project card goes up */
 .selected-project-exit {
   bottom: 0px;
   opacity: 1;
@@ -93,17 +113,13 @@
               opacity 400ms ease-in;
 }
 
-.project-card-exit-done {
-  opacity: 0;
-}
-
-.project-card-exit-done:hover {
-  cursor: default;
-}
-
+/* fixes new project popup bug */
 .new-project-card {
   opacity: 0;
 }
+
+
+/* BUTTONS */
 
 .project-card-buttons-container {
   opacity: 0;
@@ -113,6 +129,7 @@
 }
 
 
+/* buttons div entrance / exit classes */
 .project-control-buttons-enter {
   opacity: 0;
 }
