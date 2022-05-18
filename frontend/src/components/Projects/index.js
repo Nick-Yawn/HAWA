@@ -77,9 +77,18 @@ export default function Projects() {
   };
 
   // scroll function
+  // this is counter-intuitive, but this works correctly
+  const minOffset = generateOffset(projects, projects[projects.length - 1]?.id || -1);
+  const maxOffset = generateOffset(projects, -1);
   const handleWheel = e => {
-    if(!formActive && !editActive)
-      setXOffset(prev => prev - e.deltaY * 3)
+    if(!formActive && !editActive){
+      setXOffset(prev => {
+        const offset = prev - e.deltaY * 2.25 //225 pixels per event
+        if( offset < minOffset ) return minOffset
+        else if( offset > maxOffset ) return maxOffset
+        else return offset
+      })
+    }
   }
 
 
