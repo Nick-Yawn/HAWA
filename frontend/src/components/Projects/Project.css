@@ -8,8 +8,8 @@
 
 .project-sidebar {
   height: 100%;
-  width: 18%;
-  background-color: rgba(0,0,0,.6); /*var(--nav-bar-bg);*/
+  width: 248px;
+  background-color: rgba(0,0,0,.57); /*var(--nav-bar-bg);*/
   box-sizing: border-box;
   max-width:
 }
