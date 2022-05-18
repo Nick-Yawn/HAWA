@@ -1,26 +1,42 @@
-
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 
 import './NavBar.css'
 
 const NavBar = () => {
+  const user = useSelector(state => state.session?.user) 
+
   return (
     <nav>
-      <NavLink to='/' exact={true} activeClassName='active'>
-        Home
-      </NavLink>
-      <NavLink to='/login' exact={true} activeClassName='active'>
-        Login
-      </NavLink>
-      <NavLink to='/sign-up' exact={true} activeClassName='active'>
-        Sign Up
-      </NavLink>
-      <NavLink to='/projects' exact={true} activeClassName='active'>
-        Projects
-      </NavLink>
-      <LogoutButton />
+      <div className="nav-bar-left nav-section">
+        <Link to='/' className="navlink">
+          <span className="logo">HAWA</span>
+        </Link>
+      </div>
+
+
+      <div className="nav-bar-right nav-section">
+        {!user && (
+          <>
+            <Link to='/sign-up' className="navlink">
+              Sign Up
+            </Link>
+            <Link to='/login' className="navlink">
+              Login
+            </Link>
+          </>
+        )}
+        {user && (
+          <>
+            <Link to='/projects' className="navlink">
+              Projects
+            </Link>
+            <LogoutButton />
+          </>
+        )}
+      </div>
     </nav>
   );
 }
