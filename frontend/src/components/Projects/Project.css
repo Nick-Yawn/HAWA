@@ -1,0 +1,20 @@
+
+
+.sidebar-and-main-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.project-sidebar {
+  height: 100%;
+  width: 18%;
+  background-color: rgba(0,0,0,.6); /*var(--nav-bar-bg);*/
+  box-sizing: border-box;
+  max-width:
+}
+
+.project-main {
+  height: 100%;
+  flex: auto;
+}
