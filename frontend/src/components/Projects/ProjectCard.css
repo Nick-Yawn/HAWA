@@ -19,6 +19,9 @@
   background-color: var(--nav-bar-bg);
 
   user-select: none;
+  transition: border 500ms var(--my-cubic-bezier),
+              width 700ms var(--my-cubic-bezier),
+              height 700ms var(--my-cubic-bezier);
 }
 
 
