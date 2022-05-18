@@ -33,6 +33,8 @@ export default function Projects() {
 
   projects.sort((a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) );
 
+  useEffect(()=>{console.log(xoffset)},[xoffset]);
+
   // initial read
   useEffect(() => {
     const func = async () => {
@@ -94,7 +96,6 @@ export default function Projects() {
 
   // classNames
   let className = "project-card-container";
-  if( formActive || editActive )    className += " project-card-container-form-active"  // for cursor:hover on bg
   if( formSubmitted ) className += " project-card-container-freeze-animation" // fixes wiggle on submit
 
   // the first card is not provided a project prop and therefore becomes the new project form
