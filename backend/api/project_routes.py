@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user, login_required
-from backend.models import User, Project, db
+from backend.models import User, Project, db, Feature
 from backend.forms.project_form import ProjectForm
 
 project_routes = Blueprint('projects', __name__)
@@ -10,7 +10,11 @@ project_routes = Blueprint('projects', __name__)
 @project_routes.route('/', methods = ['GET'])
 @login_required
 def get_user_projects():
-    return current_user.projects_to_dict();
+    projects = db.session.execute(db.select(Project).options(db.joinedload(Project.features)).where(Project.user_id == current_user.id)).unique()
+
+    return {'projects': [p[0].to_dict() for p in projects]}
+    #return current_user.projects_to_dict();
+    
 
 # create project
 @project_routes.route('/', methods = ['POST'])
