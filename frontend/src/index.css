@@ -20,6 +20,8 @@ body {
 
   --global-blur: blur(5px);
   --nav-bar-bg: rgba(0,0,0,.5);
-  --font-color: white;
+  --dark-bg: rgba(0,0,0,.8);
+  --font-color: rgb(233,233,233);
+  --border-radius: 25px;
   --my-cubic-bezier: cubic-bezier(0.22,1,.36,1);
 }

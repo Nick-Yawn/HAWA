@@ -16,7 +16,7 @@ export default function Splash() {
         <span className="splash-text splash-copy">Routes*</span>
         <span className="splash-text splash-copy">User Stories*</span>
         <span className="splash-text splash-copy">Acceptance Criteria*</span>
-        <span className="splash-text splash-copy">With painless conversion to pre-formatted wiki docs.*</span>
+        <span className="splash-text splash-copy">with painless conversion to pre-formatted wiki docs.*</span>
         <span className="splash-text splash-copy coming-soon">*Coming soon!</span>
         <Link to='/sign-up' className="splash-signup-link">— Get Started —</Link>
         <div className="splash-footer-container">

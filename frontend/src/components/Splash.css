@@ -8,14 +8,15 @@
 
 .splash-content {
   max-width: 600px;
-  background-color: rgba(0,0,0,.8);
-  color: rgb(230, 230, 230);
+  background-color: var(--dark-bg); 
+  color: var(--font-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   font-weight: 300;
   font-size: 20px;
-  border-radius: 25px;
+  border-radius: var(--border-radius);
+
   padding: 14px;
   cursor: default;
 }
@@ -36,7 +37,7 @@
 .splash-signup-link {
   margin: 36px 0;
   font-size: 30px;
-  color: white;
+  color: var(--font-color);
   text-decoration: none;
 }
 
@@ -54,8 +55,8 @@
 }
 
 a.splash-link {
-  color: white;
   padding: 6px;
+  color: var(--font-color);
 }
 
 
