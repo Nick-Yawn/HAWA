@@ -14,6 +14,8 @@ class Project(db.Model):
 
     created_at = db.Column(db.DateTime(timezone = True), server_default = func.now())
 
+    features = db.relationship('Feature')
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -21,5 +23,6 @@ class Project(db.Model):
             'repo_link': self.repo_link,
             'site_link': self.site_link,
             'user_id': self.user_id,
-            'created_at': self.created_at
+            'created_at': self.created_at,
+            'features': [feature.to_dict() for feature in self.features ]
                 }
