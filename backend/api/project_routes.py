@@ -10,11 +10,13 @@ project_routes = Blueprint('projects', __name__)
 @project_routes.route('/', methods = ['GET'])
 @login_required
 def get_user_projects():
-    projects = db.session.execute(db.select(Project).options(db.joinedload(Project.features)).where(Project.user_id == current_user.id)).unique()
-
-    return {'projects': [p[0].to_dict() for p in projects]}
-    #return current_user.projects_to_dict();
-    
+    print('<<<<<<')
+    statement = db.select(Project) \
+                    .options(db.joinedload(Project.features)) \
+                    .where(Project.user_id == current_user.id)
+    projects = db.session.execute(statement).unique().scalars()
+    print('>>>>>>')
+    return {'projects': [p.to_dict() for p in projects]}
 
 # create project
 @project_routes.route('/', methods = ['POST'])
