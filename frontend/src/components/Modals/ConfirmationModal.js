@@ -15,7 +15,8 @@ export function Modal({children, hideModalFunc}) {
   , modalNode);
 }
 
-export default function ConfirmationModal({ children, func, project }) {
+/* */
+export default function ConfirmationModal({ children, func, project, buttonsActive }) {
   const [ showModal, setShowModal ] = useState(false);
   const [ title, setTitle ] = useState('');
   const confirmRef = useRef(null);
@@ -26,7 +27,7 @@ export default function ConfirmationModal({ children, func, project }) {
     }
   }, [showModal])
 
-  const showModalFunc = e => setShowModal(true);
+  const showModalFunc = e => { if(buttonsActive) setShowModal(true) };
   const hideModalFunc = e => {
     setShowModal(false);
     setTitle('');
