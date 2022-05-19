@@ -54,7 +54,7 @@ export default function ProjectCard(props) {
   // event handlers
   const handleSubmit = async e => {
     e.preventDefault();
-    if( title.trim() === '' ) return;// TODO: validation message or color change of some kind
+    if( title.trim() === '' || formSubmitted ) return;// TODO: validation message or color change of some kind
     const newProject = await dispatch(postProject({title: title.trim()})) 
     if( newProject.id ){
       setFormSubmitted(true);
