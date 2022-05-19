@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux'
 import { CSSTransition } from 'react-transition-group';
 import { postProject, deleteProject, editProject } from '../../store/projects'; 
+import ConfirmationModal from '../Modals/ConfirmationModal.js';
 
 // this component is either simply a link to the single project page, or a form to create a new project
 //    as this grows, I am struck by the thought that I should have made this two separate components
@@ -68,7 +69,7 @@ export default function ProjectCard(props) {
 
   const deleteButtonFunc = async e => {
     //TODO: add confirmation modal
-    if( !isSelectedProject || editActive ) return;
+    //if( !isSelectedProject || editActive ) return;
     dispatch(deleteProject(project.id))
   }
 
@@ -154,7 +155,9 @@ export default function ProjectCard(props) {
           <div className="project-card-buttons-container">
             <button onClick={enterButtonFunc}> Enter </button>
             <button onClick={editButtonFunc}> Edit </button>
-            <button onClick={deleteButtonFunc}> Delete </button>
+            <ConfirmationModal func={deleteButtonFunc} project={project}>
+              <button className="red-button"> Delete </button>
+            </ConfirmationModal>
           </div>
       </CSSTransition>
     </div>

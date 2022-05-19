@@ -1,0 +1,47 @@
+
+.modal-background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 2;  
+
+  backdrop-filter: blur(5px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-modal {
+  color: white;
+  padding: 58px 72px;
+  border-radius: 25px; 
+  background-color: rgba(0,0,0,.8); 
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-text {
+  padding: 22px 0px;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.delete-project-name {
+  display: flex;
+  justify-content: center;
+}
+
+.delete-warning {
+  padding-top: 0px;
+}
+
+.modal-form {
+  padding-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
