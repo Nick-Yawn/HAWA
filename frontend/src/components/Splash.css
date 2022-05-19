@@ -1,0 +1,64 @@
+.splash-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-content {
+  max-width: 600px;
+  background-color: rgba(0,0,0,.8);
+  color: rgb(230, 230, 230);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 300;
+  font-size: 20px;
+  border-radius: 25px;
+  padding: 14px;
+  cursor: default;
+}
+
+.splash-text {
+  padding: 12px;
+}
+
+.splash-copy {
+  line-height: 28px; 
+  padding: 2px;
+}
+
+.coming-soon {
+  font-size: 16px;
+}
+
+.splash-signup-link {
+  margin: 36px 0;
+  font-size: 30px;
+  color: white;
+  text-decoration: none;
+}
+
+.splash-title {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+
+.splash-footer-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%; 
+  font-size: 18px;
+}
+
+a.splash-link {
+  color: white;
+  padding: 6px;
+}
+
+
+.splash-credit-text {
+  padding-right: 6px; 
+}
