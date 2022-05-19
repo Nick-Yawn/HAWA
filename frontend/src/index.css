@@ -24,4 +24,20 @@ body {
   --font-color: rgb(233,233,233);
   --border-radius: 25px;
   --my-cubic-bezier: cubic-bezier(0.22,1,.36,1);
+  --error-color: #FF00EE;
+}
+
+input {
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: Lato, sans-serif;
+  width: 100%;
+  padding: 12px 0;
+  margin: 0 14px;
+  font-size: 18px;
+  background-color: var(--nav-bar-bg);
+  border-radius: 12px;
+  border: 1px solid black;
+  color: var(--font-color);
+  text-align: center;
 }
