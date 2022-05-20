@@ -44,6 +44,12 @@ def login():
         return user.to_dict()
     return {'errors': ["Invalid username or password."]}, 400
 
+@auth_routes.route('/demo-login', methods=['GET'])
+def demo_login():
+    user = User.query.get(1);
+    login_user(user);
+    return user.to_dict()
+
 
 @auth_routes.route('/logout')
 def logout():

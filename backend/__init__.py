@@ -74,3 +74,7 @@ def react_root(path):
 @app.errorhandler(405)
 def method_not_allowed(e):
     return {"errors": ["Method Not Allowed"]}, 405
+
+@app.errorhandler(404)
+def not_found(e):
+    return {"errors": ["Not Found"]}, 404
