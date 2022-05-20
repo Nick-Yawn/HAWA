@@ -11,7 +11,7 @@ export default function Splash() {
       <div className="splash-content">
         <span className="welcome-to splash-text">Welcome to</span>
         <span className="splash-title splash-text">HAWA</span>
-        <span className="splash-text splash-copy">HAWA makes CRUD-app planning easy. Create Projects, then add...</span>
+        <span className="splash-text splash-copy">HAWA makes CRUD-app planning easy. Create Projects, then add:</span>
         <span className="splash-text splash-copy">Features</span>
         <span className="splash-text splash-copy">Routes*</span>
         <span className="splash-text splash-copy">User Stories*</span>
