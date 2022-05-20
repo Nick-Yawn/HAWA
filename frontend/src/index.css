@@ -35,9 +35,14 @@ input {
   padding: 12px 0;
   margin: 0 14px;
   font-size: 18px;
+  font-weight: 300;
   background-color: var(--nav-bar-bg);
   border-radius: 12px;
   border: 1px solid black;
   color: var(--font-color);
   text-align: center;
+}
+
+input:focus {
+  outline: 1px solid cyan;
 }

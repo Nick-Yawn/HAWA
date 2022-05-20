@@ -138,13 +138,23 @@ export default function ProjectCard(props) {
         <div className={divClassName} onClick={handleClick} >
           { editActive || project?.title  || formActive || "Start a Project"}
           {formActive && isCreateCard && (
-            <form onSubmit={handleSubmit}>
-              <input type="text" ref={inputRef} value={title} onChange={updateTitle} onKeyDown={handleKeyDown} />
+            <form onSubmit={handleSubmit} className="card-form">
+              <input  type="text" 
+                      className="card-input"
+                      ref={inputRef} 
+                      value={title} 
+                      onChange={updateTitle} 
+                      onKeyDown={handleKeyDown} />
             </form>
           )}
           {isSelectedProject && editActive &&(
-            <form onSubmit={handleEdit}>
-              <input type="text" ref={editRef} value={title} onChange={updateTitle} onKeyDown={handleKeyDown} />
+            <form onSubmit={handleEdit} className="card-form">
+              <input  type="text" 
+                      className="card-input"
+                      ref={editRef} 
+                      value={title} 
+                      onChange={updateTitle} 
+                      onKeyDown={handleKeyDown} />
             </form>
           )}
         </div >
