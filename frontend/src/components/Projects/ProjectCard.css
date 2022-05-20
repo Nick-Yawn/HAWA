@@ -39,6 +39,15 @@
               height 700ms var(--my-cubic-bezier);
 }
 
+.project-error-message {
+  padding: 12px 18px;
+  border-radius: 6px;
+  position: absolute;
+  bottom: 44%;
+  background-color: var(--nav-bar-bg);
+  color: var(--error-color);
+}
+
 .buttons-offset {
   margin-top: 113px;
 }

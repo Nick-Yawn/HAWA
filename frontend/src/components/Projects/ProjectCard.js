@@ -24,6 +24,7 @@ export default function ProjectCard(props) {
   const isCreateCard      = project === undefined;
   const isSelectedProject = selectedProjectId === project?.id
   const [title, setTitle] = useState('')
+  const [noInput, setNoInput] = useState(false);
   const inputRef = useRef(null);
   const editRef = useRef(null);
 
@@ -39,14 +40,18 @@ export default function ProjectCard(props) {
   useEffect(()=>{
     if( formActive && isCreateCard )
       inputRef.current.focus();
-    if( !formActive )
+    if( !formActive ){
       setTitle('');// this is to clear the form after closing it 
+      setNoInput(false);
+    }
   },[formActive, isCreateCard]);
 
   useEffect(()=>{
     if( editActive && isSelectedProject ){
       editRef.current.focus();
       setTitle(project?.title);//hack alert: for some reason the useState won't grab the title
+    } else {
+      setNoInput(false);
     }
   },[editActive, isSelectedProject])
 
@@ -54,7 +59,11 @@ export default function ProjectCard(props) {
   // event handlers
   const handleSubmit = async e => {
     e.preventDefault();
-    if( title.trim() === '' || formSubmitted ) return;// TODO: validation message or color change of some kind
+    if( formSubmitted ) return;
+    if( title.trim() === '' ){ 
+      setNoInput(true);
+      return;
+    }
     const newProject = await dispatch(postProject({title: title.trim()})) 
     if( newProject.id ){
       setFormSubmitted(true);
@@ -81,7 +90,10 @@ export default function ProjectCard(props) {
 
   const handleEdit = async e => {
     e.preventDefault();
-    if( title.trim() === '' ) return;
+    if( title.trim() === '' ){
+      setNoInput(true);
+      return;
+    }
     const newTitle = await dispatch(editProject({id: project.id, title}));
     project.title = newTitle;
     setEditActive(false);
@@ -111,6 +123,7 @@ export default function ProjectCard(props) {
     }
   }
 
+  const displayErrorMessage = noInput && ((formActive && isCreateCard) || editActive)
   
   // controlled input
   const updateTitle = e => setTitle(e.target.value);
@@ -159,6 +172,9 @@ export default function ProjectCard(props) {
           )}
         </div >
       </CSSTransition>
+      {displayErrorMessage && (
+        <div className="project-error-message">Title requires content.</div>
+      )}
       <CSSTransition  in={buttonsActive}
                       timeout={500}
                       classNames="project-control-buttons">
