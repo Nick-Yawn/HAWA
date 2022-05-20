@@ -142,6 +142,7 @@ export default function ProjectCard(props) {
 
   return (
     <div className={containerClassName}>
+      {displayErrorMessage && <div className="project-error-message error-flex-spacer">-</div>}
       <CSSTransition  in={cardActive}
                       appear={true}
                       timeout={500} 
