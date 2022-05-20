@@ -7,6 +7,11 @@
 
 }
 
+.signup-form-title {
+  font-size: 32px;
+  font-weight: 300; 
+}
+
 .signup-form {
   border-radius: var(--border-radius);
   background-color: var(--nav-bar-bg); 
