@@ -12,7 +12,7 @@ const NavBar = () => {
     <nav>
       <div className="nav-bar-left nav-section">
         <Link to='/' className="navlink">
-          <span className="logo">HAWA</span>
+          <span id="logo">HAWA</span>
         </Link>
       </div>
 

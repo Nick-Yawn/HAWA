@@ -18,9 +18,10 @@ nav {
   margin: 0px 14px;
 }
 
-.logo {
+#logo {
   font-size: 22px;
   font-weight: 300;
+  color: white;
 }
 
 a.navlink {

@@ -33,8 +33,6 @@ export default function Projects() {
 
   projects.sort((a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) );
 
-  useEffect(()=>{console.log(xoffset)},[xoffset]);
-
   // initial read
   useEffect(() => {
     const func = async () => {

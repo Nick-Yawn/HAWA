@@ -4,11 +4,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
 }
 
 .signup-form-title {
   font-size: 32px;
   font-weight: 300; 
+}
+
+.signup-form-and-demo-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap-reverse;
+  gap: 25px;
 }
 
 .signup-form {

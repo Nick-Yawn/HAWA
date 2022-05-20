@@ -1,0 +1,6 @@
+
+.demo-user-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

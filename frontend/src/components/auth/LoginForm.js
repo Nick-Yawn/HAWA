@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import DemoUserPanel from './DemoUserPanel';
 
 import './LoginForm.css';
 
@@ -34,33 +35,36 @@ const LoginForm = () => {
 
   return (
     <div className="login-form-container">
-    <form className="login-form" onSubmit={onLogin}>
-      <div className="login-title">Login</div>
-      <div className="login-errors">
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+      <div className="login-form-and-demo-panel"> 
+        <DemoUserPanel text={'Sign Up'} path={'/sign-up'} />
+        <form className="login-form" onSubmit={onLogin}>
+          <div className="login-title">Login</div>
+          <div className="login-errors">
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div className="form-label-and-input">
+            <label htmlFor='email'>Email</label>
+            <input
+              name='email'
+              type='text'
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div className="form-label-and-input">
+            <label htmlFor='password'>Password</label>
+            <input
+              name='password'
+              type='password'
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+          <button type='submit'>Login</button>
+        </form>
       </div>
-      <div className="form-label-and-input">
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div className="form-label-and-input">
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          value={password}
-          onChange={updatePassword}
-        />
-      </div>
-      <button type='submit'>Login</button>
-    </form>
     </div>
   );
 };
