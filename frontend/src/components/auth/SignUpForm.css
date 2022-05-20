@@ -25,6 +25,10 @@
   gap: 25px;
 }
 
+.signup-form:hover {
+  cursor: default;
+}
+
 .form-label-and-input {
   display: flex;
   flex-direction: column;

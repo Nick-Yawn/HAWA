@@ -166,7 +166,7 @@ export default function ProjectCard(props) {
             <button onClick={enterButtonFunc}> Enter </button>
             <button onClick={editButtonFunc}> Edit </button>
             <ConfirmationModal func={deleteButtonFunc} project={project} buttonsActive={buttonsActive}>
-              <button className="red-button"> Delete </button>
+              <button> Delete </button>
             </ConfirmationModal>
           </div>
       </CSSTransition>
