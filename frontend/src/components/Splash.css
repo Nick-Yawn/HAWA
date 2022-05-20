@@ -1,0 +1,67 @@
+.splash-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-content {
+  max-width: 600px;
+  background-color: var(--nav-bar-bg); 
+  color: var(--font-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 300;
+  font-size: 20px;
+  border-radius: var(--border-radius);
+
+  padding: 14px;
+  cursor: default;
+}
+
+.splash-text {
+  padding: 12px;
+}
+
+.splash-copy {
+  line-height: 28px; 
+  padding: 2px;
+}
+
+.coming-soon {
+  font-size: 16px;
+}
+
+.get-started-button {
+  margin: 36px 0;
+  padding: 14px;
+  font-size: 30px;
+  width: 250px;
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+.splash-title {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 4px;
+}
+
+.splash-footer-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%; 
+  font-size: 18px;
+}
+
+a.splash-link {
+  padding: 6px;
+  color: var(--font-color);
+}
+
+
+.splash-credit-text {
+  padding-right: 6px; 
+}

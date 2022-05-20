@@ -20,6 +20,56 @@ body {
 
   --global-blur: blur(5px);
   --nav-bar-bg: rgba(0,0,0,.5);
-  --font-color: white;
+  --dark-bg: rgba(0,0,0,.8);
+  --font-color: rgb(233,233,233);
+  --border-radius: 25px;
   --my-cubic-bezier: cubic-bezier(0.22,1,.36,1);
+  --error-color: #FF00EE;
 }
+
+input {
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: Lato, sans-serif;
+  width: 100%;
+  padding: 12px 0;
+  margin: 0 14px;
+  font-size: 18px;
+  font-weight: 300;
+  background-color: var(--nav-bar-bg);
+  border-radius: 12px;
+  border: 1px solid black;
+  color: var(--font-color);
+  text-align: center;
+}
+
+input:focus {
+  outline: 1px solid cyan;
+}
+
+button {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 300;
+  padding: 6px;
+  width: 80px;
+  border-radius: 8px;
+  color: var(--font-color);
+  background-color: var(--nav-bar-bg);
+  border: 1px solid black;
+}
+
+button:hover {
+  cursor: pointer;
+  border: 1px solid cyan;
+}
+
+button.red-button {
+  border: 1px solid red;
+}
+
+button:disabled {
+  border: 1px solid grey;
+  color: grey;
+}
+

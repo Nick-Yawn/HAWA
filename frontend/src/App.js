@@ -6,8 +6,10 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import Projects from './components/Projects';
 import Project from './components/Projects/Project';
+import Splash from './components/Splash';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -29,7 +31,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/' exact={true}>
-          <h1> Home Page </h1>
+          <Splash />
         </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
