@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { readProjects, postFeature } from '../../store/projects';
+import { readProjects, postFeature, deleteFeature } from '../../store/projects';
 import { useParams } from 'react-router-dom';
 
 import './Facet.css';
@@ -49,12 +49,19 @@ export default function Facet(props) {
 
   const stopTheProp = e => e.stopPropagation();
 
+  const handleDelete = async e => {
+    e.preventDefault();
+    
+    await dispatch(deleteFeature(facet?.id));
+  }
+
   const handleSubmit = async e => {
     e.preventDefault();
     if( name.trim() === '' ){
       setNoInput(true);
       return;
     }
+
     const newFeature = await dispatch(postFeature( {name, project_id} ))
 
     if( newFeature.id ){
@@ -70,7 +77,7 @@ export default function Facet(props) {
         { facet.name }
         </div>
         <button className="facet-button"> Edit </button>
-        <button className="facet-button"> Delete </button>
+        <button className="facet-button facet-delete" onClick={handleDelete}> Delete </button>
       </div>
       
     </div>

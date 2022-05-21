@@ -47,3 +47,7 @@
 .facet-form {
   min-width: 200px;
 }
+
+.facet-delete:hover {
+  border: 1px solid red;
+}
