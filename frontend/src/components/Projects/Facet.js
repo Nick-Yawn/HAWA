@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { readProjects, postFeature, deleteFeature } from '../../store/projects';
+import { readProjects, postFeature, deleteFeature, editFeature } from '../../store/projects';
 import { useParams } from 'react-router-dom';
 
 import './Facet.css';
@@ -15,11 +15,13 @@ export default function Facet(props) {
   const dispatch = useDispatch();
   const project_id = +useParams().project_id
   const [ formActive, setFormActive ] = useState(false);
+  const [ editActive, setEditActive ] = useState(false);
   const [ name, setName ]             = useState('');
   const [ noInput, setNoInput ]       = useState(false);
   const [ linkIndex, setLinkIndex ]   = useState(null);
   const formRef = useRef(null);
- 
+  const editRef = useRef(null);
+
   // add this facet, if it exists to sidebar 
   useEffect(()=>{
     dispatch(readProjects());
@@ -33,6 +35,7 @@ export default function Facet(props) {
   useEffect(()=>{
     if( !aFormActive ){
       setFormActive(false);
+      setEditActive(false);
       setNoInput(false);
       setName('');
     }
@@ -43,9 +46,22 @@ export default function Facet(props) {
       formRef.current.focus();
   },[formActive])
 
+  useEffect(()=>{
+    if( editActive ){
+      editRef.current.focus();
+      setName(facet.name)
+    }
+  },[editActive])
+
   const showForm = e => {
     e.stopPropagation();
     setFormActive(true);
+    setAFormActive(true);
+  }
+
+  const showEdit = e => {
+    e.stopPropagation();
+    setEditActive(true);
     setAFormActive(true);
   }
 
@@ -67,6 +83,7 @@ export default function Facet(props) {
   const handleInputKeyDown = e => {
     if( e.key === "Escape" ){
       setFormActive(false);
+      setEditActive(false);
     }
   }
 
@@ -90,14 +107,46 @@ export default function Facet(props) {
     }
   };
 
+  const handleEdit = async e => {
+    e.preventDefault();
+    if( name.trim() === '' ){
+      setNoInput(true);
+      return
+    }
+
+    await dispatch(editFeature( {id: facet.id, name} ))
+
+    setEditActive(false);
+  }
+
 
   if( facet ) return (
     <div className="facet-container">
       <div className="facet-header">
-        <div className="facet-name">
-        { facet.name }
-        </div>
-        <button className="facet-button"> Edit </button>
+        {editActive ||
+          <div className="facet-name">
+            { facet.name }
+          </div>
+        }
+        {editActive &&
+          <form className="facet-form"
+                onSubmit={handleEdit}
+                onClick={stopTheProp}>
+            <input  className="facet-input"
+                    type="text"
+                    ref={editRef}
+                    value={name}
+                    onChange={updateName}
+                    onKeyDown={handleInputKeyDown}
+                    />
+          </form>
+        }
+        { noInput && ( 
+          <div className="facet-name facet-error">
+            Content is required.
+          </div>
+        )}
+        <button className="facet-button" onClick={showEdit}> Edit </button>
         <button className="facet-button facet-delete" onClick={handleDelete}> Delete </button>
       </div>
       
