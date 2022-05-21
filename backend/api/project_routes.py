@@ -60,6 +60,7 @@ def update_project(id):
     db.session.commit()
     return project.to_dict()
 
+# post feature
 @project_routes.route('/<int:id>/features', methods = ['POST'])
 @login_required
 def post_feature(id):
@@ -73,7 +74,7 @@ def post_feature(id):
   if name.strip() == '':
     return {'errors':['Name is required.']}, 400
 
-  feature = Feature( project_id=Int(id), name=name )
+  feature = Feature( project_id=int(id), name=name )
   db.session.add(feature)
   db.session.commit()
   return feature.to_dict()
