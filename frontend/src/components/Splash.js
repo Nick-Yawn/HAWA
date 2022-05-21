@@ -25,10 +25,10 @@ export default function Splash() {
         <div className="splash-footer-container">
           <div className="splash-text splash-credits">
             <span className="splash-credit-text">An original work by Nick Yuan</span>
-            <a href="https://github.com/Nick-Yawn" target="_blank" className="splash-link" >
+            <a href="https://github.com/Nick-Yawn" target="_blank" rel="noreferrer" className="splash-link" >
               <i className="fa-brands fa-github" />
             </a>
-            <a href="https://www.linkedin.com/in/nick-yawn/" target="_blank" className="splash-link" >
+            <a href="https://www.linkedin.com/in/nick-yawn/" target="_blank" rel="noreferrer" className="splash-link" >
               <i className="fa-brands fa-linkedin" />
             </a>
           </div>
