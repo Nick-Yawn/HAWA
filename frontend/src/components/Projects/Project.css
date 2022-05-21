@@ -11,11 +11,24 @@
   width: 248px;
   background-color: rgba(0,0,0,.57); /*var(--nav-bar-bg);*/
   box-sizing: border-box;
+
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-link {
+  padding: 6px 0;
+  color: var(--font-color);
 }
 
 .project-main {
   height: 100%;
   flex: auto;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
 }
 
 .project-page-appear {
