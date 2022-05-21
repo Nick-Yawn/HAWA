@@ -19,6 +19,21 @@ def delete_feature(id):
 
     return {'project_id':project_id, 'id':id}
 
+@feature_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_feature(id):
+    feature = Feature.query.get(id)
+
+    name = request.json['name']
+
+    if name.strip() == '':
+        return {'errors':['Name is required.']}, 400
+    
+    feature.name = name
+    
+    db.session.commit()
+
+    return feature.to_dict()
 
 @feature_routes.errorhandler(500)
 def error_handler(e):

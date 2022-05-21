@@ -94,6 +94,7 @@ export const deleteProject = projectId => async dispatch => {
 
 const POST_FEATURE    = 'features/POST_FEATURE';
 const DELETE_FEATURE  = 'features/DELETE_FEATURE';
+const EDIT_FEATURE    = 'features/EDIT_FEATURE';
 
 const postFeatureAction = feature => ({
   type: POST_FEATURE,
@@ -102,6 +103,11 @@ const postFeatureAction = feature => ({
 
 const deleteFeatureAction = feature => ({
   type: DELETE_FEATURE,
+  feature
+})
+
+const editFeatureAction = feature => ({
+  type: EDIT_FEATURE,
   feature
 })
 
@@ -139,6 +145,22 @@ export const deleteFeature = featureId => async dispatch => {
   }
 }
 
+export const editFeature = feature => async dispatch => {
+  const response = await fetch(`/api/features/${feature.id}`,{
+    method: 'PUT',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(feature)
+  })
+
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(editFeatureAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
+}
 
 //        
 // REDUCER
@@ -173,6 +195,15 @@ export default function projects(state = [], action) {
       const features = project.features;
       const index = features.findIndex(f => f.id === +action.feature.id);
       features.splice(index, 1);
+      project.features = [...features];
+      newState[action.feature.project_id] = {...project};
+      return newState;
+    }
+    case EDIT_FEATURE:{
+      const project = newState[action.feature.project_id];
+      const features = project.features;
+      const index = features.findIndex(f => f.id === +action.feature.id);
+      features[index] = action.feature
       project.features = [...features];
       newState[action.feature.project_id] = {...project};
       return newState;
