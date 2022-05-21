@@ -4,3 +4,22 @@ from backend.models import User, Project, Feature, db
 
 feature_routes = Blueprint('features', __name__)
 
+
+@feature_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_feature(id):
+    feature = Feature.query.get(id)
+
+    project_id = feature.project_id
+
+    # TODO: CHECK PERMISSIONS
+
+    db.session.delete(feature)
+    db.session.commit()
+
+    return {'project_id':project_id, 'id':id}
+
+
+@feature_routes.errorhandler(500)
+def error_handler(e):
+    return {'errors':['Interal Server Error']}, 500
