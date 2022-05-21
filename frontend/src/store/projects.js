@@ -148,7 +148,8 @@ export default function projects(state = [], action) {
   switch( action.type ){
     case GET_PROJECTS:
       action.projects.forEach( project => {
-        newState[project.id] = project});
+        newState[project.id] = project;
+      });
       return newState;
     case POST_PROJECT:
       newState[action.project.id] = action.project;
