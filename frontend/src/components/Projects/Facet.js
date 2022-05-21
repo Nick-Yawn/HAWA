@@ -56,6 +56,10 @@ export default function Facet(props) {
       return;
     }
     const newFeature = await dispatch(postFeature( {name, project_id} ))
+
+    if( newFeature.id ){
+      setName('');
+    }
   };
 
 
