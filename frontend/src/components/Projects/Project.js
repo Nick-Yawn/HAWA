@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
-//import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import Facet from './Facet';
 
 import './Project.css';
 
 export default function Project() {
-//  const {project_id} = useParams();
-  
+  const { project_id } = useParams();
+  const project = useSelector( state => state.projects[+project_id] );
   // state slice holds sidebar links, each first render of facet adds to links
   const [ links, setLinks ] = useState([]);
-  
+ 
+  const features = project.features;
+  features.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) ); 
 
   return (
     <CSSTransition  in={true}
@@ -23,7 +27,9 @@ export default function Project() {
           )}
         </div>
         <div className="project-main">
-          
+          { features.map( feature => (
+            <Facet facet={feature} setLinks={setLinks} />
+          ))}
         </div>
       </div>
     </CSSTransition>
