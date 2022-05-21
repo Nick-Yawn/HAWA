@@ -21,7 +21,6 @@ export default function Projects() {
   const dispatch = useDispatch();
   const history  = useHistory();
   const [ selectedProjectId, setSelectedProjectId]  = useState(null);
-  const [ lastSelectedId, setLastSelectedId]        = useState(null);
   const [ projectExecuted, setProjectExecuted ]     = useState(false);
   const [ formActive, setFormActive ]               = useState(false);
   const [ editActive, setEditActive ]               = useState(false);
@@ -44,12 +43,6 @@ export default function Projects() {
     func();
   }, [dispatch])
 
-  // track lastSelectedId, not currently in use
-  useEffect(() => {
-    if(selectedProjectId || formActive)
-      setLastSelectedId(selectedProjectId);
-  },[selectedProjectId, formActive]) 
-
   // this is for centering the currently active card / form
   useEffect(()=>{
     if( formActive ){
@@ -57,7 +50,7 @@ export default function Projects() {
     } else if( selectedProjectId ){
       setXOffset(generateOffset(projectsArray, selectedProjectId));
     } else if( !selectedProjectId ){
-     // setXOffset(generateOffset(projects, lastSelectedId || -1));
+      setXOffset(0);
     }
   },[formActive, selectedProjectId, editActive])
 

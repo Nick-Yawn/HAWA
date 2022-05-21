@@ -80,9 +80,8 @@ export default function ProjectCard(props) {
   }
 
   const deleteButtonFunc = async e => {
-    //TODO: add confirmation modal
-    //if( !isSelectedProject || editActive ) return;
     dispatch(deleteProject(project.id))
+    setSelectedProjectId(null);
   }
 
   const editButtonFunc = e => {
@@ -200,7 +199,9 @@ export default function ProjectCard(props) {
           <div className="project-card-buttons-container">
             {/*<button onClick={enterButtonFunc}> Enter </button>*/}
             <button tabIndex={buttonsActive? "0" : "-1"} onClick={editButtonFunc}> Edit </button>
-            <ConfirmationModal func={deleteButtonFunc} project={project} buttonsActive={buttonsActive}>
+            <ConfirmationModal  func={deleteButtonFunc} 
+                                project={project} 
+                                buttonsActive={buttonsActive}>
               <button tabIndex={buttonsActive ? "0" : "-1"}> Delete </button>
             </ConfirmationModal>
           </div>
