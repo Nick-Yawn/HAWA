@@ -1,8 +1,49 @@
 .facet-header {
-  background-color: var(--nav-bar-bg);
   padding: 14px;
+
+  display: flex;
+  gap: 14px;
+}
+
+.facet-header:hover {
+  cursor: default;
+}
+
+.facet-form:hover {
+  cursor: pointer;
+}
+
+.facet-name {
+  background-color: var(--nav-bar-bg);
   color: var(--font-color);
-  border-radius: 8px;
+  border-radius: 12px;
   width: max-content;
-  margin: 14px;
+  min-width: 200px;
+
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.add-facet-label {
+  background-color: var(--dark-bg); 
+}
+
+.facet-error {
+  color: var(--error-color);
+  font-weight: 500;
+}
+
+.facet-input {
+  background-color: var(--dark-bg); 
+  height: 50px;
+  min-width: 228px;
+  margin: 0;
+  text-align: left;
+  padding-left: 14px;
+  box-sizing: border-box;
+}
+
+.facet-form {
+  min-width: 200px;
 }

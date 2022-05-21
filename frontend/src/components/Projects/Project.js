@@ -8,16 +8,17 @@ import './Project.css';
 
 export default function Project() {
   const { project_id } = useParams();
-  let project = useSelector( state => state.projects[+project_id] );
-  if( project == undefined ) project = {title:'test project', features:[
-    {name:'first feature'},
-    {name:'second feature'}
-  ] };
-  // state slice holds sidebar links, each first render of facet adds to links
+  const project = useSelector( state => state.projects[+project_id] );
   const [ links, setLinks ] = useState([]);
+  const [ aFormActive, setAFormActive ] = useState(false);
  
-  const features = project.features;
-  features.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) ); 
+  const features = project?.features;
+  if( features )
+    features.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) ); 
+
+  const handleBGClick = e => {
+    setAFormActive(false);
+  }
 
   return (
     <CSSTransition  in={true}
@@ -30,10 +31,16 @@ export default function Project() {
             <div className={`sidebar-link ${link.className}`}>{link}</div>
           )}
         </div>
-        <div className="project-main">
-          { features.map( feature => (
-            <Facet facet={feature} setLinks={setLinks} />
+        <div className="project-main" onClick={handleBGClick}>
+          { features?.map( feature => (
+            <Facet  facet={feature} 
+                    aFormActive={aFormActive}
+                    setAFormActive={setAFormActive}
+                    setLinks={setLinks} />
           ))}
+          <Facet  setLinks={setLinks}
+                  setAFormActive={setAFormActive}
+                  aFormActive={aFormActive}/>
         </div>
       </div>
     </CSSTransition>

@@ -15,6 +15,7 @@
   padding: 14px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .sidebar-link {
