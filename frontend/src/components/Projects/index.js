@@ -29,9 +29,11 @@ export default function Projects() {
   const [ loadingComplete, setLoadingComplete ]     = useState(false);
   const [ xoffset, setXOffset ]                     = useState(0);
   const projects      = useSelector(state => state.projects)
-  const projectsExist = projects?.length > 0; 
 
-  projects.sort((a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) );
+  const projectsArray = Object.values(projects);
+  const projectsExist = projectsArray?.length > 0; 
+
+  projectsArray.sort((a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) );
 
   // initial read
   useEffect(() => {
@@ -51,9 +53,9 @@ export default function Projects() {
   // this is for centering the currently active card / form
   useEffect(()=>{
     if( formActive ){
-      setXOffset(projects.length * (200 + 25));
+      setXOffset(projectsArray.length * (200 + 25));
     } else if( selectedProjectId ){
-      setXOffset(generateOffset(projects, selectedProjectId));
+      setXOffset(generateOffset(projectsArray, selectedProjectId));
     } else if( !selectedProjectId ){
      // setXOffset(generateOffset(projects, lastSelectedId || -1));
     }
@@ -78,8 +80,8 @@ export default function Projects() {
 
   // scroll function
   // this is counter-intuitive, but this works correctly
-  const minOffset = generateOffset(projects, projects[projects.length - 1]?.id || -1);
-  const maxOffset = generateOffset(projects, -1);
+  const minOffset = generateOffset(projectsArray, projectsArray[projectsArray.length - 1]?.id || -1);
+  const maxOffset = generateOffset(projectsArray, -1);
   const handleWheel = e => {
     if(!formActive && !editActive){
       setXOffset(prev => {
@@ -119,7 +121,7 @@ export default function Projects() {
                         setEditActive={setEditActive}
                         />
           {projectsExist && (
-            projects.map((project, i) => 
+            projectsArray.map((project, i) => 
               <ProjectCard  project={project} 
                             selectedProjectId={selectedProjectId} 
                             setSelectedProjectId={setSelectedProjectId}

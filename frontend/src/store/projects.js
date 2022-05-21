@@ -90,10 +90,12 @@ export const deleteProject = projectId => async dispatch => {
 
 // Reducer is not currently normalized. Reducer may be normalized when further features are implemented
 export default function projects(state = [], action) {
-  let newState = [...state];
+  let newState = {...state};
   switch( action.type ){
     case GET_PROJECTS:
-      return [ ...action.projects ]
+      action.projects.forEach( project => {
+        newState[project.id] = project});
+      return newState;
     case POST_PROJECT:
       newState = [...newState, action.project]
       return newState;
