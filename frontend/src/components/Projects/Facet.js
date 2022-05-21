@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { readProjects } from '../../store/projects';
 
 import './Facet.css';
 
@@ -9,12 +11,15 @@ export default function Facet(props) {
           setLinks,
           aFormActive,
           setAFormActive} = props;
+  const dispatch = useDispatch();
   const [ formActive, setFormActive ] = useState(false);
-  const [ name, setName ] = useState('');
+  const [ name, setName ]             = useState('');
+  const [ noInput, setNoInput ]       = useState(false);
   const formRef = useRef(null);
  
   // add this facet, if it exists to sidebar 
   useEffect(()=>{
+    dispatch(readProjects());
     if( facet ) setLinks( prevLinks => [...prevLinks, facet.name] )
   },[])
 
@@ -22,6 +27,8 @@ export default function Facet(props) {
   useEffect(()=>{
     if( !aFormActive ){
       setFormActive(false);
+      setNoInput(false);
+      setName('');
     }
   },[aFormActive])
 
@@ -38,8 +45,14 @@ export default function Facet(props) {
 
   const updateName = e => setName(e.target.value);
 
+  const stopTheProp = e => e.stopPropagation();
+
   const handleSubmit = e => {
     e.preventDefault();
+    if( name.trim() === '' ){
+      setNoInput(true);
+      return;
+    }
   };
 
 
@@ -55,10 +68,17 @@ export default function Facet(props) {
     </div>
   ); else return (
     <div className="facet-container">
-      <div className="facet-header facet-form" onClick={showForm}>
-        {formActive || <div className="facet-name add-facet-label">+ Add a Feature</div> }
+      <div className="facet-header">
+        {formActive || 
+          <div  onClick={showForm} 
+                className="facet-name add-facet-label">
+            + Add a Feature
+          </div>
+        }
         {formActive && (
-          <form onSubmit={handleSubmit}>
+          <form className="facet-form" 
+                onSubmit={handleSubmit}
+                onClick={stopTheProp}>
             <input  type="text"
                     ref={formRef}
                     value={name}
@@ -67,9 +87,13 @@ export default function Facet(props) {
             />
           </form>
         )}
-      </div>
 
-      
+      { noInput && ( 
+        <div className="facet-name facet-error">
+          Content is required.
+        </div>
+      )}
+      </div>
     </div>
   );
 }
