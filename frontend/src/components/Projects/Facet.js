@@ -17,12 +17,16 @@ export default function Facet(props) {
   const [ formActive, setFormActive ] = useState(false);
   const [ name, setName ]             = useState('');
   const [ noInput, setNoInput ]       = useState(false);
+  const [ linkIndex, setLinkIndex ]   = useState(null);
   const formRef = useRef(null);
  
   // add this facet, if it exists to sidebar 
   useEffect(()=>{
     dispatch(readProjects());
-    if( facet ) setLinks( prevLinks => [...prevLinks, facet.name] )
+    if( facet ) setLinks( prevLinks => { 
+      setLinkIndex(prevLinks.length);
+      return [...prevLinks, facet.name];
+    })
   },[])
 
 
@@ -53,6 +57,11 @@ export default function Facet(props) {
     e.preventDefault();
     
     await dispatch(deleteFeature(facet?.id));
+
+    setLinks(prevLinks => {
+      prevLinks.splice(linkIndex, 1);
+      return [...prevLinks];
+    })
   }
 
   const handleSubmit = async e => {
