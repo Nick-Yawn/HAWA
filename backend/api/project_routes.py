@@ -60,6 +60,24 @@ def update_project(id):
     db.session.commit()
     return project.to_dict()
 
+@project_routes.route('/<int:id>/features', methods = ['POST'])
+@login_required
+def post_feature(id):
+  project = Project.query.get(id)
+
+  if project.user_id != current_user.id:
+      return {'errors': ["Access Denied"]}, 403
+  
+  name = request.json['name']  
+
+  if name.strip() == '':
+    return {'errors':['Name is required.']}, 400
+
+  feature = Feature( project_id=Int(id), name=name )
+  db.session.add(feature)
+  db.session.commit()
+  return feature.to_dict()
+
 @project_routes.errorhandler(500)
 def internal_server_error(e):
     return {'errors': ["Internal Server Error"]}, 500
