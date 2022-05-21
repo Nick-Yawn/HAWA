@@ -12,8 +12,8 @@ nav {
 }
 
 .nav-section {
-  width: 160px;
   display: flex;
+  gap: 46px;
   justify-content: space-between;
   margin: 0px 14px;
 }

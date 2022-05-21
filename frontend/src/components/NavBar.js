@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 
 import './NavBar.css'
@@ -16,6 +16,9 @@ const NavBar = () => {
         </Link>
       </div>
 
+      <div className="nav-section">
+        <span id="project-title"></span> 
+      </div>
 
       <div className="nav-bar-right nav-section">
         {!user && (
