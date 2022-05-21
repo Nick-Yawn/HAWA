@@ -8,8 +8,8 @@ import './Project.css';
 
 export default function Project() {
   const { project_id } = useParams();
-  //const project = useSelector( state => state.projects[+project_id] );
-  const project = {title:'test project', features:[
+  let = useSelector( state => state.projects[+project_id] );
+  if( project == undefined ) project = {title:'test project', features:[
     {name:'first feature'},
     {name:'second feature'}
   ] };
