@@ -53,6 +53,7 @@
 }
 
 .form-resizer {
+  z-index: -1;
   grid-area: a;
   font-family: Lato, sans-serif;
   opacity: 0;
@@ -63,3 +64,4 @@
 .facet-delete:hover {
   border: 1px solid red;
 }
+

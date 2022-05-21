@@ -24,7 +24,7 @@ export default function ProjectCard(props) {
   const isCreateCard      = project === undefined;
   const isSelectedProject = selectedProjectId === project?.id
   const [title, setTitle] = useState('')
-  const [noInput, setNoInput] = useState(false);
+  const [error, setError] = useState(false);
   const inputRef = useRef(null);
   const editRef = useRef(null);
 
@@ -42,7 +42,7 @@ export default function ProjectCard(props) {
       inputRef.current.focus();
     if( !formActive ){
       setTitle('');// this is to clear the form after closing it 
-      setNoInput(false);
+      setError(null);
     }
   },[formActive, isCreateCard]);
 
@@ -51,7 +51,7 @@ export default function ProjectCard(props) {
       editRef.current.focus();
       setTitle(project?.title);//hack alert: for some reason the useState won't grab the title
     } else {
-      setNoInput(false);
+      setError(null);
     }
   },[editActive, isSelectedProject])
 
@@ -61,7 +61,10 @@ export default function ProjectCard(props) {
     e.preventDefault();
     if( formSubmitted ) return;
     if( title.trim() === '' ){ 
-      setNoInput(true);
+      setError('Title required.');
+      return;
+    } else if( title.length > 80 ){
+      setError('Title must be less than 80 characters.');
       return;
     }
     const newProject = await dispatch(postProject({title: title.trim()})) 
@@ -91,7 +94,10 @@ export default function ProjectCard(props) {
   const handleEdit = async e => {
     e.preventDefault();
     if( title.trim() === '' ){
-      setNoInput(true);
+      setError('Title required.');
+      return;
+    } else if( title.length > 80){
+      setError('Title must be less than 80 characters');
       return;
     }
     const newTitle = await dispatch(editProject({id: project.id, title}));
@@ -135,7 +141,7 @@ export default function ProjectCard(props) {
     }
   }
 
-  const displayErrorMessage = noInput && ((formActive && isCreateCard) || editActive)
+  const displayErrorMessage = error && ((formActive && isCreateCard) || editActive)
   
   // controlled input
   const updateTitle = e => setTitle(e.target.value);
@@ -166,7 +172,7 @@ export default function ProjectCard(props) {
           {formActive && isCreateCard && (
             <form onSubmit={handleSubmit} className="card-form">
               <input  type="text" 
-                      className="card-input"
+                className={"card-input " + (title.length > 80 ? "bad-input" : "")}
                       ref={inputRef} 
                       value={title} 
                       onChange={updateTitle} 
@@ -176,7 +182,7 @@ export default function ProjectCard(props) {
           {isSelectedProject && editActive &&(
             <form onSubmit={handleEdit} className="card-form">
               <input  type="text" 
-                      className="card-input"
+                      className={"card-input " + (title.length > 80 ? "bad-input" : "")}
                       ref={editRef} 
                       value={title} 
                       onChange={updateTitle} 
@@ -186,7 +192,7 @@ export default function ProjectCard(props) {
         </div >
       </CSSTransition>
       {displayErrorMessage && (
-        <div className="project-error-message">Title requires content.</div>
+        <div className="project-error-message">{error}</div>
       )}
       <CSSTransition  in={buttonsActive}
                       timeout={500}

@@ -43,6 +43,10 @@ input {
   text-align: center;
 }
 
+.bad-input {
+  color: red;
+}
+
 input:focus {
   outline: 1px solid cyan;
 }

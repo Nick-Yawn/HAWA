@@ -141,7 +141,7 @@ export default function Facet(props) {
                 onSubmit={handleEdit}
                 onClick={stopTheProp}>
             <div className="form-resizer">{name}</div>
-            <input  className="facet-input"
+            <input  className={"facet-input " + (name.length > 80 ? "bad-input" : "")}
                     type="text"
                     ref={editRef}
                     value={name}
@@ -180,7 +180,7 @@ export default function Facet(props) {
                     ref={formRef}
                     value={name}
                     onKeyDown={handleInputKeyDown}
-                    className="facet-input"
+                    className={"facet-input " + (name.length > 80 ? "bad-input" : "")}
                     onChange={updateName}
             />
           </form>
