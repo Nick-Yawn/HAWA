@@ -7,8 +7,14 @@ const LogoutButton = () => {
   const onLogout = async (e) => {
     await dispatch(logout());
   };
+  
+  const handleKeyDown = e =>{
+    if(e.key === "Enter"){
+      onLogout();
+    }
+  }
 
-  return <a className="navlink" onClick={onLogout}>Logout</a>;
+  return <a className="navlink" tabIndex="0" onKeyDown={handleKeyDown} onClick={onLogout}>Logout</a>;
 };
 
 export default LogoutButton;

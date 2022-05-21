@@ -106,6 +106,18 @@ export default function ProjectCard(props) {
     }
   };
 
+  const handleCardKeyDown = e => {
+    if(e.key === "Enter"){
+      handleClick(e);
+    }
+  };
+
+  const handleContainerKeyDown = e => {
+    if(e.key === "Escape"){
+      setSelectedProjectId(null);
+    }
+  }
+
   const handleClick = e => {
     if( !cardActive ) return;
     e.stopPropagation();
@@ -141,7 +153,7 @@ export default function ProjectCard(props) {
   if( isSelectedProject && formActive ) containerClassName += " new-project-card"
 
   return (
-    <div className={containerClassName}>
+    <div className={containerClassName} onKeyDown={handleContainerKeyDown}>
       {displayErrorMessage && <div className="project-error-message error-flex-spacer">-</div>}
       <CSSTransition  in={cardActive}
                       appear={true}
@@ -149,7 +161,7 @@ export default function ProjectCard(props) {
                       onExited={redirectToProject} 
                       classNames={animationClassName}>
 
-        <div className={divClassName} onClick={handleClick} >
+        <div className={divClassName} onClick={handleClick} tabIndex="0" onKeyDown={handleCardKeyDown} >
           { editActive || project?.title  || formActive || "Start a Project"}
           {formActive && isCreateCard && (
             <form onSubmit={handleSubmit} className="card-form">
@@ -181,9 +193,9 @@ export default function ProjectCard(props) {
                       classNames="project-control-buttons">
           <div className="project-card-buttons-container">
             {/*<button onClick={enterButtonFunc}> Enter </button>*/}
-            <button onClick={editButtonFunc}> Edit </button>
+            <button tabIndex={buttonsActive? "0" : "-1"} onClick={editButtonFunc}> Edit </button>
             <ConfirmationModal func={deleteButtonFunc} project={project} buttonsActive={buttonsActive}>
-              <button> Delete </button>
+              <button tabIndex={buttonsActive ? "0" : "-1"}> Delete </button>
             </ConfirmationModal>
           </div>
       </CSSTransition>

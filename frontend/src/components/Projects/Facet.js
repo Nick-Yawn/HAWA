@@ -64,6 +64,18 @@ export default function Facet(props) {
     })
   }
 
+  const handleInputKeyDown = e => {
+    if( e.key === "Escape" ){
+      setFormActive(false);
+    }
+  }
+
+  const handleAddButtonKeyDown = e => {
+    if( e.key === "Enter" ){
+      e.target.click();
+    }
+  }
+
   const handleSubmit = async e => {
     e.preventDefault();
     if( name.trim() === '' ){
@@ -94,7 +106,9 @@ export default function Facet(props) {
     <div className="facet-container">
       <div className="facet-header">
         {formActive || 
-          <div  onClick={showForm} 
+          <div  onClick={showForm}
+                tabIndex="0"
+                onKeyDown={handleAddButtonKeyDown}
                 className="facet-name add-facet-label">
             + Add a Feature
           </div>
@@ -106,6 +120,7 @@ export default function Facet(props) {
             <input  type="text"
                     ref={formRef}
                     value={name}
+                    onKeyDown={handleInputKeyDown}
                     className="facet-input"
                     onChange={updateName}
             />
