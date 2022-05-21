@@ -19,8 +19,14 @@
 }
 
 .sidebar-link {
-  padding: 6px 0;
+  padding: 8px 0;
   color: var(--font-color);
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.sidebar-link:hover {
+  cursor: default;
 }
 
 .project-main {

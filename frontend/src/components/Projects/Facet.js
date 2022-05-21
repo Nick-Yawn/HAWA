@@ -17,7 +17,7 @@ export default function Facet(props) {
   const [ formActive, setFormActive ] = useState(false);
   const [ editActive, setEditActive ] = useState(false);
   const [ name, setName ]             = useState('');
-  const [ noInput, setNoInput ]       = useState(false);
+  const [ error, setError ]           = useState(false);
   const [ linkIndex, setLinkIndex ]   = useState(null);
   const formRef = useRef(null);
   const editRef = useRef(null);
@@ -36,7 +36,7 @@ export default function Facet(props) {
     if( !aFormActive ){
       setFormActive(false);
       setEditActive(false);
-      setNoInput(false);
+      setError(null);
       setName('');
     }
   },[aFormActive])
@@ -63,6 +63,8 @@ export default function Facet(props) {
     e.stopPropagation();
     setEditActive(true);
     setAFormActive(true);
+    if( editRef.current )
+      editRef.current.focus();
   }
 
   const updateName = e => setName(e.target.value);
@@ -96,12 +98,13 @@ export default function Facet(props) {
   const handleSubmit = async e => {
     e.preventDefault();
     if( name.trim() === '' ){
-      setNoInput(true);
+      setError("Name is required.");
+      return;
+    } else if( name.length > 80 ){
+      setError("Name must be less than 80 characters.")
       return;
     }
-
     const newFeature = await dispatch(postFeature( {name, project_id} ))
-
     if( newFeature.id ){
       setName('');
     }
@@ -110,13 +113,18 @@ export default function Facet(props) {
   const handleEdit = async e => {
     e.preventDefault();
     if( name.trim() === '' ){
-      setNoInput(true);
+      setError("Name is required.");
       return
+    } else if( name.length > 80 ){
+      setError("Name must be less than 80 characters.")
+      return;
     }
-
     await dispatch(editFeature( {id: facet.id, name} ))
-
     setEditActive(false);
+    setLinks(prevLinks => {
+      prevLinks.splice(linkIndex, 1, name);
+      return [...prevLinks];
+    })
   }
 
 
@@ -132,6 +140,7 @@ export default function Facet(props) {
           <form className="facet-form"
                 onSubmit={handleEdit}
                 onClick={stopTheProp}>
+            <div className="form-resizer">{name}</div>
             <input  className="facet-input"
                     type="text"
                     ref={editRef}
@@ -141,9 +150,9 @@ export default function Facet(props) {
                     />
           </form>
         }
-        { noInput && ( 
+        { error && ( 
           <div className="facet-name facet-error">
-            Content is required.
+            {error}
           </div>
         )}
         <button className="facet-button" onClick={showEdit}> Edit </button>
@@ -166,6 +175,7 @@ export default function Facet(props) {
           <form className="facet-form" 
                 onSubmit={handleSubmit}
                 onClick={stopTheProp}>
+            <div className="form-resizer">{name}</div>
             <input  type="text"
                     ref={formRef}
                     value={name}
@@ -176,11 +186,11 @@ export default function Facet(props) {
           </form>
         )}
 
-      { noInput && ( 
-        <div className="facet-name facet-error">
-          Content is required.
-        </div>
-      )}
+        { error && ( 
+          <div className="facet-name facet-error">
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -35,9 +35,11 @@
 }
 
 .facet-input {
+  grid-area: a;
   background-color: var(--dark-bg); 
   height: 50px;
   min-width: 228px;
+  width: 100%;
   margin: 0;
   text-align: left;
   padding-left: 13px;
@@ -45,7 +47,17 @@
 }
 
 .facet-form {
+  display: grid;
+  grid-template-areas: 'a';
   min-width: 200px;
+}
+
+.form-resizer {
+  grid-area: a;
+  font-family: Lato, sans-serif;
+  opacity: 0;
+  padding: 0px 13px;
+  font-size: 18px;
 }
 
 .facet-delete:hover {
