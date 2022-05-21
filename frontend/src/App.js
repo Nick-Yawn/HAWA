@@ -45,6 +45,9 @@ function App() {
         <ProtectedRoute path='/projects/:project_id' exact={true}>
           <Project />
         </ProtectedRoute>
+        <Route path='/project-test'>
+          <Project />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

@@ -1,0 +1,8 @@
+.facet-header {
+  background-color: var(--nav-bar-bg);
+  padding: 14px;
+  color: var(--font-color);
+  border-radius: 8px;
+  width: max-content;
+  margin: 14px;
+}
