@@ -69,8 +69,8 @@ export default function Facet(props) {
         <div className="facet-name">
         { facet.name }
         </div>
-        <div className="facet-name"> Edit </div>
-        <div className="facet-name"> Delete </div>
+        <button className="facet-button"> Edit </button>
+        <button className="facet-button"> Delete </button>
       </div>
       
     </div>
