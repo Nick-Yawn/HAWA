@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { readProjects } from '../../store/projects';
+import { readProjects, postFeature } from '../../store/projects';
+import { useParams } from 'react-router-dom';
 
 import './Facet.css';
 
@@ -12,6 +13,7 @@ export default function Facet(props) {
           aFormActive,
           setAFormActive} = props;
   const dispatch = useDispatch();
+  const project_id = +useParams().project_id
   const [ formActive, setFormActive ] = useState(false);
   const [ name, setName ]             = useState('');
   const [ noInput, setNoInput ]       = useState(false);
@@ -47,12 +49,13 @@ export default function Facet(props) {
 
   const stopTheProp = e => e.stopPropagation();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if( name.trim() === '' ){
       setNoInput(true);
       return;
     }
+    const newFeature = await dispatch(postFeature( {name, project_id} ))
   };
 
 

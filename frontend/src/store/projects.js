@@ -88,7 +88,34 @@ export const deleteProject = projectId => async dispatch => {
   }
 }
 
-// Reducer is not currently normalized. Reducer may be normalized when further features are implemented
+// FEATURES
+
+const POST_FEATURE = 'features/POST_FEATURE';
+
+const postFeatureAction = feature => ({
+  type: POST_FEATURE,
+  feature
+})
+
+export const postFeature = feature => async dispatch => {
+  const response = await fetch(`/api/projects/${feature.project_id}/features`, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(feature)
+  })
+
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(postFeatureAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+    return {id: null};
+  }
+  
+}
+
 export default function projects(state = [], action) {
   let newState = {...state};
   switch( action.type ){
@@ -97,16 +124,20 @@ export default function projects(state = [], action) {
         newState[project.id] = project});
       return newState;
     case POST_PROJECT:
-      newState = [...newState, action.project]
+      newState[action.project.id] = action.project;
       return newState;
     case DELETE_PROJECT:{
-      const projectIndex = newState.findIndex(project => project.id === +action.project.id);
-      newState.splice(projectIndex, 1);
+      delete newState[action.project.id];
       return newState;
     }
     case EDIT_PROJECT:{
-      const projectIndex = newState.findIndex(project => project.id === +action.project.id);
-      newState[projectIndex] = action.project;
+      newState[action.project.id] = action.project;
+      return newState;
+    }
+    case POST_FEATURE:{
+      const project = newState[action.feature.project_id];
+      project.features = [...project.features, action.feature];
+      newState[action.feature.project_id] = {...project}
       return newState;
     }
     default:
