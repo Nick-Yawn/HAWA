@@ -27,9 +27,9 @@ export default function Project() {
                     classNames={"project-page"}>
       <div className="sidebar-and-main-container">
         <div className="project-sidebar">
-          {links.map(link => 
+          {/*links.map(link => 
             <div className={`sidebar-link ${link.className}`}>{link}</div>
-          )}
+          )*/}
         </div>
         <div className="project-main" onClick={handleBGClick}>
           { features?.map( feature => (
