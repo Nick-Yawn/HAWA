@@ -56,7 +56,9 @@
   z-index: -1;
   grid-area: a;
   font-family: Lato, sans-serif;
+  border: 1px;
   opacity: 0;
+  letter-spacing: -.2px;
   padding: 0px 13px;
   font-size: 18px;
 }
