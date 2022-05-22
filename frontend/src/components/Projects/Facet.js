@@ -139,7 +139,7 @@ export default function Facet(props) {
           <form className="facet-form"
                 onSubmit={handleEdit}
                 onClick={stopTheProp}>
-            <div className="form-resizer">{name}</div>
+            <div className="form-resizer">{name.replaceAll(' ', '\xa0')}</div>
             <input  className={"facet-input " + (name.length > 80 ? "bad-input" : "")}
                     type="text"
                     ref={editRef}
@@ -174,7 +174,7 @@ export default function Facet(props) {
           <form className="facet-form" 
                 onSubmit={handleSubmit}
                 onClick={stopTheProp}>
-            <div className="form-resizer">{name}</div>
+            <div className="form-resizer">{name.replaceAll(' ', '\xa0')}</div>
             <input  type="text"
                     ref={formRef}
                     value={name}
