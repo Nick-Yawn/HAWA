@@ -81,7 +81,7 @@ export default function ProjectCard(props) {
 
   const deleteButtonFunc = async e => {
     dispatch(deleteProject(project.id))
-    setSelectedProjectId(null);
+    setSelectedProjectId(0);
   }
 
   const editButtonFunc = e => {

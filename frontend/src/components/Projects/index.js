@@ -49,7 +49,7 @@ export default function Projects() {
       setXOffset(projectsArray.length * (200 + 25));
     } else if( selectedProjectId ){
       setXOffset(generateOffset(projectsArray, selectedProjectId));
-    } else if( !selectedProjectId ){
+    } else if( selectedProjectId === 0 ){
       setXOffset(0);
     }
   },[formActive, selectedProjectId, editActive])
