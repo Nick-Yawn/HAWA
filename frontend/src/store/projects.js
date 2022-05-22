@@ -5,6 +5,7 @@ const GET_PROJECTS    = 'projects/GET_PROJECTS'
 const POST_PROJECT    = 'projects/POST_PROJECT'
 const DELETE_PROJECT  = 'projects/DELETE_PROJECT'
 const EDIT_PROJECT    = 'projects/EDIT_PROOJECT'
+const CLEAR_PROJECTS  = 'projects/CLEAR_PROJECTS'
 
 const getProjectsAction = projects => ({
   type: GET_PROJECTS,
@@ -25,6 +26,14 @@ const editProjectAction = project => ({
   type: EDIT_PROJECT,
   project
 })
+
+const clearProjectsAction = () => ({
+  type: CLEAR_PROJECTS
+})
+
+export const clearProjects = () => async dispatch => {
+  await dispatch(clearProjectsAction());
+}
 
 export const readProjects = () => async dispatch => {
   const response = await fetch('/api/projects/');
@@ -183,6 +192,9 @@ export default function projects(state = [], action) {
     case EDIT_PROJECT:{
       newState[action.project.id] = action.project;
       return newState;
+    }
+    case CLEAR_PROJECTS:{
+      return {};
     }
     case POST_FEATURE:{
       const project = newState[action.feature.project_id];
