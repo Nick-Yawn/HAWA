@@ -29,6 +29,15 @@ Once you've created your Project, add Features by clicking on the "Add a Feature
 
 https://user-images.githubusercontent.com/18235032/169673408-9572b795-ed04-441f-91ab-01545d0712d1.mp4
 
+
+Multiple Projects? No problem! Easily view and manage your projects from the Projects view.
+
+
+
+https://user-images.githubusercontent.com/18235032/169697927-472053db-a555-419f-83df-5102601b03d5.mp4
+
+
+
 More features are coming soon!
 
 
