@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { readProjects, postFeature, deleteFeature, editFeature } from '../../store/projects';
+import { postFeature, deleteFeature, editFeature } from '../../store/projects';
 import { useParams } from 'react-router-dom';
 
 import './Facet.css';
@@ -24,7 +24,6 @@ export default function Facet(props) {
 
   // add this facet, if it exists to sidebar 
   useEffect(()=>{
-    dispatch(readProjects());
     if( facet ) setLinks( prevLinks => { 
       setLinkIndex(prevLinks.length);
       return [...prevLinks, facet.name];

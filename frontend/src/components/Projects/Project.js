@@ -1,16 +1,27 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams, Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import { readProjects } from '../../store/projects';
 import Facet from './Facet';
 
 import './Project.css';
 
 export default function Project() {
+  const dispatch = useDispatch();
   const { project_id } = useParams();
   const project = useSelector( state => state.projects[+project_id] );
   const [ links, setLinks ] = useState([]);
   const [ aFormActive, setAFormActive ] = useState(false);
+  const [ isLoaded, setIsLoaded ] = useState(false)
+
+  useEffect(()=>{
+    const func = async () => {
+      await dispatch(readProjects());
+      setIsLoaded(true);
+    }
+    func();
+  },[])
  
   const features = project?.features;
   if( features )
@@ -18,6 +29,10 @@ export default function Project() {
 
   const handleBGClick = e => {
     setAFormActive(false);
+  }
+
+  if( isLoaded && project === undefined ){
+    return (<Redirect to='/projects' />);
   }
 
   return (
