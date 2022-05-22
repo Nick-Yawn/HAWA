@@ -148,6 +148,7 @@ export default function ProjectCard(props) {
 
   // various classNames
   let divClassName = "project-card";
+  if( isCreateCard ) divClassName += " create-card";
   if( formActive && isCreateCard ) divClassName += " project-card-active";
   if( isSelectedProject && editActive ) divClassName += " project-card-active";
   if( isSelectedProject ) divClassName += " project-selected";

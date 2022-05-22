@@ -31,6 +31,10 @@
   gap: 25px;
 }
 
+.create-card {
+
+}
+
 .project-selected {
   border: 1px solid cyan;
   transition: border 500ms var(--my-cubic-bezier),
