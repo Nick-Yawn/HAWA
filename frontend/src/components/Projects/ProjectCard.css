@@ -163,6 +163,13 @@
   gap: 25px;
 }
 
+.project-card-buttons-container > button:hover {
+  cursor: default;
+}
+
+.project-card-buttons-container > div > button:hover {
+  cursor: default;
+}
 
 /* buttons div entrance / exit classes */
 .project-control-buttons-enter {
@@ -186,6 +193,10 @@
   cursor: pointer;
 }
 
+.project-control-buttons-enter-done > div > button:hover {
+  cursor: pointer;
+}
+
 .project-control-buttons-exit {
   opacity: 1;
 }
@@ -199,5 +210,10 @@
   opacity: 0;
 }
 
+.project-control-buttons-exit-done > button:hover {
+  cursor: default;
+}
 
-
+.project-control-buttons-exit-done > div > button:hover {
+  cursor: default;
+}

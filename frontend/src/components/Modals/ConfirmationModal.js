@@ -28,8 +28,10 @@ export default function ConfirmationModal({ children, func, project, buttonsActi
   }, [showModal])
 
   const showModalFunc = e => { 
-    if(buttonsActive) setShowModal(true) 
-    e.stopPropagation();
+    if(buttonsActive){
+      setShowModal(true) 
+      e.stopPropagation();
+    }
   };
   const hideModalFunc = e => {
     setShowModal(false);
