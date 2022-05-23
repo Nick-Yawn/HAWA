@@ -32,6 +32,12 @@ export default function Facet(props) {
 
 
   useEffect(()=>{
+    if( error )
+      if( name.trim() !== '' && name.length <= 80 )
+        setError(null)
+  },[name, error])
+
+  useEffect(()=>{
     if( !aFormActive ){
       setFormActive(false);
       setEditActive(false);
