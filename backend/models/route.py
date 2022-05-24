@@ -33,8 +33,8 @@ class Route(db.Model):
     def to_dict(self):
         return {
             'id':     self.id,
-            'type':   self.type,
-            'method': self.method,
+            'type':   self.type.value if isinstance(self.type, Enum) else None,
+            'method': self.method.name if isinstance(self.method, Enum) else None,
             'path':   self.path,
             'label':  self.label,
             'feature_id': self.feature_id,

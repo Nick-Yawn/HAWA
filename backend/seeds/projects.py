@@ -15,9 +15,7 @@ def seed_projects():
     db.session.commit()
 
     r1 = Route( type= "Front-End",
-                method= null,
                 path= "/resource",
-                label= null,
                 feature_id=1,
                 project_id=1 ) 
     r2 = Route( type= "API",
@@ -33,7 +31,6 @@ def seed_projects():
                 feature_id=1,
                 project_id=1 ) 
     r4 = Route( type= "Front-End",
-                method= null,
                 path= "/resource",
                 label= "read all",
                 feature_id=2,
