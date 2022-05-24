@@ -94,6 +94,10 @@ export default function Facet(props) {
     }
   }
 
+  const handleDoubleClick = e => {
+    showEdit(e);
+  }
+
   const handleAddButtonKeyDown = e => {
     if( e.key === "Enter" ){
       e.target.click();
@@ -137,7 +141,7 @@ export default function Facet(props) {
     <div className="facet-container">
       <div className="facet-header">
         {editActive ||
-          <div className="facet-name">
+          <div className="facet-name" onDoubleClick={handleDoubleClick}>
             { facet.name }
           </div>
         }
