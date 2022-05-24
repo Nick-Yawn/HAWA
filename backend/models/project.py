@@ -24,5 +24,5 @@ class Project(db.Model):
             'site_link': self.site_link,
             'user_id': self.user_id,
             'created_at': self.created_at,
-            'features': [feature.to_dict() for feature in self.features ]
+            'features': {feature.id: feature.to_dict() for feature in self.features }
                 }
