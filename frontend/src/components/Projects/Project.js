@@ -23,9 +23,8 @@ export default function Project() {
     func();
   },[])
  
-  const features = project?.features;
-  if( features )
-    features.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) ); 
+  const features = Object.values(project?.features || {});
+  features.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) ); 
 
   const handleBGClick = e => {
     setAFormActive(false);
@@ -47,7 +46,7 @@ export default function Project() {
           )*/}
         </div>
         <div className="project-main" onClick={handleBGClick}>
-          { features?.map( feature => (
+          { features.map( feature => (
             <Facet  facet={feature} 
                     aFormActive={aFormActive}
                     setAFormActive={setAFormActive}
