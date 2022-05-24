@@ -12,7 +12,7 @@ project_routes = Blueprint('projects', __name__)
 def get_user_projects():
     print('<<<<<<')
     statement = db.select(Project) \
-                    .options(db.joinedload(Project.features)) \
+                    .options(db.joinedload('*')) \
                     .where(Project.user_id == current_user.id)
     projects = db.session.execute(statement).unique().scalars()
     print('>>>>>>')

@@ -9,10 +9,13 @@ class Feature(db.Model):
     project_id  = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
     created_at  = db.Column(db.DateTime(timezone = True), server_default = func.now())
 
+    routes      = db.Relationship('Route', cascade='all, delete')
+
     def to_dict(self):
         return {
                 'id': self.id,
                 'name': self.name,
                 'project_id': self.project_id,
-                'created_at': self.created_at
+                'created_at': self.created_at,
+                'routes': [route.to_dict() for route in self.routes]
                 }
