@@ -22,7 +22,7 @@ export default function Facet(props) {
   const formRef = useRef(null);
   const editRef = useRef(null);
 
-  // add this facet, if it exists to sidebar 
+  // add this facet if it exists to sidebar 
   useEffect(()=>{
     if( facet ) setLinks( prevLinks => { 
       setLinkIndex(prevLinks.length);
@@ -127,7 +127,7 @@ export default function Facet(props) {
   }
 
 
-  if( facet ) return (
+  if( facet ) return ( // form version
     <div className="facet-container">
       <div className="facet-header">
         {editActive ||
@@ -159,7 +159,7 @@ export default function Facet(props) {
       </div>
       
     </div>
-  ); else return (
+  ); else return ( // regular version
     <div className="facet-container">
       <div className="facet-header">
         {formActive || 
