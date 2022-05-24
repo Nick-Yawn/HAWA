@@ -198,25 +198,23 @@ export default function projects(state = [], action) {
     }
     case POST_FEATURE:{
       const project = newState[action.feature.project_id];
-      project.features = [...project.features, action.feature];
+      project.features = {...project.features, [action.feature.id]: action.feature};
       newState[action.feature.project_id] = {...project}
       return newState;
     }
     case DELETE_FEATURE:{
       const project = newState[action.feature.project_id];
       const features = project.features;
-      const index = features.findIndex(f => f.id === +action.feature.id);
-      features.splice(index, 1);
-      project.features = [...features];
+      delete features[action.feature.id];
+      project.features = {...features};
       newState[action.feature.project_id] = {...project};
       return newState;
     }
     case EDIT_FEATURE:{
       const project = newState[action.feature.project_id];
       const features = project.features;
-      const index = features.findIndex(f => f.id === +action.feature.id);
-      features[index] = action.feature
-      project.features = [...features];
+      features[action.feature.id] = action.feature;
+      project.features = {...features};
       newState[action.feature.project_id] = {...project};
       return newState;
     }
