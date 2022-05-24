@@ -47,6 +47,12 @@ export default function ProjectCard(props) {
   },[formActive, isCreateCard]);
 
   useEffect(()=>{
+    if( error )
+      if( title.trim() !== '' && title.length <= 80 )
+        setError(null)
+  },[title, error])
+
+  useEffect(()=>{
     if( editActive && isSelectedProject ){
       editRef.current.focus();
       setTitle(project?.title);//hack alert: for some reason the useState won't grab the title
