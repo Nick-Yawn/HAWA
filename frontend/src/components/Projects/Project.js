@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { readProjects } from '../../store/projects';
-import Facet from './Facet';
+import Feature from './Feature';
+import FeatureForm from './FeatureForm';
 
 import './Project.css';
 
@@ -47,14 +48,14 @@ export default function Project() {
         </div>
         <div className="project-main" onClick={handleBGClick}>
           { features.map( feature => (
-            <Facet  facet={feature} 
-                    aFormActive={aFormActive}
-                    setAFormActive={setAFormActive}
-                    setLinks={setLinks} />
+            <Feature  feature={feature} 
+                      aFormActive={aFormActive}
+                      setAFormActive={setAFormActive}
+                      setLinks={setLinks} />
           ))}
-          <Facet  setLinks={setLinks}
-                  setAFormActive={setAFormActive}
-                  aFormActive={aFormActive}/>
+          <FeatureForm  setLinks={setLinks}
+                        setAFormActive={setAFormActive}
+                        aFormActive={aFormActive}/>
         </div>
       </div>
     </CSSTransition>
