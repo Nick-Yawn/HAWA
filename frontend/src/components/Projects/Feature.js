@@ -163,7 +163,10 @@ export default function Feature(props) {
         {editActive && <button className="facet-button facet-delete" onClick={handleDelete}> Delete </button>}
       </div> 
       {routes.map( (route, i) => ( 
-        <Route route={route} key={i} />
+        <Route  route={route} 
+                key={i}
+                aFormActive={aFormActive}
+                setAFormActive={setAFormActive}/>
       ))}
       <RouteForm  setAFormActive={setAFormActive}
                   aFormActive={aFormActive} 

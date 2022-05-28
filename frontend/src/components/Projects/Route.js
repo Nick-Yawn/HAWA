@@ -1,11 +1,32 @@
-
+import { useState, useEffect } from 'react';
 import './Facet.css';
 
-export default function Route({route}) {
+export default function Route(props) {
+  const {
+          route,
+          aFormActive,
+          setAFormActive
+          } = props;
+  const [ editActive, setEditActive ] = useState(false); 
 
+  useEffect(()=>{
+    if( !aFormActive ){
+      setEditActive(false);
+    }
+  },[aFormActive])
+
+  const handleDoubleClick = e => {
+    setEditActive(!editActive);
+    setAFormActive(true);
+  }
+
+  const handleDelete = e => {}
 
   return (
-      <div className="facet-header route-header">
+      <div className="facet-header route-header"
+            onDoubleClick={handleDoubleClick}>
+
+
         <div className={`facet-name route-type route-${route.type}`}>
           {route.type} 
         </div> 
@@ -22,6 +43,9 @@ export default function Route({route}) {
             {route.label}  
           </div> 
         )}
+        
+        {editActive && <button className="facet-button facet-delete" onClick={handleDelete}> Delete </button>}
+        
       </div> 
   );
 }
