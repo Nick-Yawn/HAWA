@@ -171,6 +171,32 @@ export const editFeature = feature => async dispatch => {
   }
 }
 
+// ROUTES
+const POST_ROUTE = 'routes/POST_ROUTE'
+
+const postRouteAction = route => ({
+  type: POST_ROUTE,
+  route
+})
+
+export const postRoute = route => async dispatch => {
+  console.log(route);
+  const response = await fetch(`/api/features/${route.feature_id}/routes`,{
+    method: 'POST',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(route)
+  })
+
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(postRouteAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
+}
+
 //        
 // REDUCER
 //        
@@ -216,6 +242,17 @@ export default function projects(state = [], action) {
       features[action.feature.id] = action.feature;
       project.features = {...features};
       newState[action.feature.project_id] = {...project};
+      return newState;
+    }
+    case POST_ROUTE:{
+      const project = newState[action.route.project_id];
+      const features = project.features;
+      const feature = features[action.route.feature_id];
+      const routes = feature.routes;
+      routes[action.route.id] = action.route;
+      feature.routes = {...feature.routes};
+      project.features = {...features};
+      newState[action.route.project_id] = {...project};
       return newState;
     }
     default:
