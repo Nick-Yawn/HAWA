@@ -13,10 +13,6 @@
   margin-left: 28px;
 }
 
-.facet-form:hover {
-  cursor: pointer;
-}
-
 .facet-name {
   background-color: var(--nav-bar-bg);
   color: var(--font-color);
@@ -27,6 +23,20 @@
   padding: 14px;
   font-size: 18px;
   font-weight: 300;
+}
+
+select {
+  background-color: var(--dark-bg);
+  color: var(--font-color);
+  border-radius: 12px;
+  font-family: Lato, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  border: none;
+
+  padding: 4px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .route-header {
@@ -41,6 +51,10 @@
 
 .route-type {
   min-width: max-content;
+}
+
+.route-input-type:hover {
+  cursor: pointer;
 }
 
 .route-Front-End {
@@ -93,6 +107,11 @@
   box-sizing: border-box;
 }
 
+.route-path-input {
+  min-width: 160px;
+  font-family: monospace;
+}
+
 .facet-form {
   display: flex;
   gap: 14px;
@@ -104,6 +123,11 @@
   min-width: 200px;
 }
 
+.route-input-container {
+  min-width: 0;
+  width: 165px;
+}
+
 .form-resizer {
   z-index: -1;
   grid-area: a;
@@ -113,6 +137,12 @@
   letter-spacing: -.2px;
   padding: 0px 13px;
   font-size: 18px;
+}
+
+.route-path-resizer {
+  font-family: monospace;
+  padding-right: 20px;
+  min-width: min-content;
 }
 
 .facet-delete:hover {

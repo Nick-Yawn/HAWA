@@ -78,17 +78,19 @@ export default function FeatureForm(props) {
           </div>
         }
         {formActive && (
-          <form className="facet-form facet-resizeable-input-container" 
+          <form className="facet-form" 
                 onSubmit={handleSubmit}
                 onClick={stopTheProp}>
-            <div className="form-resizer">{name.replaceAll(' ', '\xa0')}</div>
-            <input  type="text"
-                    ref={formRef}
-                    value={name}
-                    onKeyDown={handleInputKeyDown}
-                    className={"facet-input " + (name.length > 80 ? "bad-input" : "")}
-                    onChange={updateName}
-            />
+            <div className="facet-resizeable-input-container">
+              <div className="form-resizer">{name.replaceAll(' ', '\xa0')}</div>
+              <input  type="text"
+                      ref={formRef}
+                      value={name}
+                      onKeyDown={handleInputKeyDown}
+                      className={"facet-input " + (name.length > 80 ? "bad-input" : "")}
+                      onChange={updateName}
+              />
+            </div>
           </form>
         )}
 

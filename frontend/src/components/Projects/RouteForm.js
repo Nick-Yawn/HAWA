@@ -22,6 +22,10 @@ export default function RouteForm(props) {
     }
   },[aFormActive]);
 
+  const handleSubmit = e => {
+    e.preventDefault();
+  }
+
   const showForm = e => {
     e.stopPropagation();
     setFormActive(true);
@@ -67,7 +71,8 @@ export default function RouteForm(props) {
       }
       { formActive && 
         <form className="facet-form"
-              onClick={stopTheProp}>
+              onClick={stopTheProp}
+              onSubmit={handleSubmit}>
           <div  className={`facet-name route-type route-input route-input-type route-${type}`}  
                 onClick={handleTypeClick}
                 onKeyDown={handleTypeKeyDown}
@@ -83,13 +88,13 @@ export default function RouteForm(props) {
               <option>DELETE</option>
             </select>
           }
-          <div className="facet-resizeable-input-container">
-            <div className="form-resizer">{path}</div>
+          <div className="facet-resizeable-input-container route-input-container">
+            <div className="form-resizer route-path-resizer">{path}</div>
           <input  type="text"
                   value={path}
                   onChange={updatePath}
-                  placeholder="/path"
-                  className="facet-input"
+                  placeholder={ type === "API" ? "/api/resource" : "/path"  }
+                  className="facet-input route-path-input"
           />
           </div>
         </form>
