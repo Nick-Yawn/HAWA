@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from backend.models import User, Project, Feature, db
+from backend.models import User, Project, Feature, Route, db
 
 feature_routes = Blueprint('features', __name__)
 
@@ -34,6 +34,29 @@ def edit_feature(id):
     db.session.commit()
 
     return feature.to_dict()
+
+@feature_routes.route('/<int:id>/routes', methods=['POST'])
+@login_required
+def post_route(id):
+    project_id = request.json['project_id']
+    project = Project.query.get(project_id)
+
+    if current_user.id != project.user_id:
+        return {'errors':['Post forbidden']}, 403
+    
+    type = request.json['type']
+    method = None
+    if type == 'API':
+        method =  request.json['method']
+    path = request.json['path']
+    label = request.json['label']
+
+    route = Route(type=type, method=method, path=path, label=label, project_id=project_id, feature_id=id)
+    
+    db.session.add(route)
+    db.session.commit()
+
+    return route.to_dict()
 
 @feature_routes.errorhandler(500)
 def error_handler(e):
