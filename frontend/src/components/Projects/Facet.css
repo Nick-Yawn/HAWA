@@ -73,6 +73,14 @@
   font-weight: 500;
 }
 
+.route-input {
+  background-color: var(--dark-bg);
+}
+
+.route-input-type {
+  user-select: none;
+}
+
 .facet-input {
   grid-area: a;
   background-color: var(--dark-bg); 
@@ -86,6 +94,11 @@
 }
 
 .facet-form {
+  display: flex;
+  gap: 14px;
+}
+
+.facet-resizeable-input-container {
   display: grid;
   grid-template-areas: 'a';
   min-width: 200px;

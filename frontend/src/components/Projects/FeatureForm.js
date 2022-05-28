@@ -78,7 +78,7 @@ export default function FeatureForm(props) {
           </div>
         }
         {formActive && (
-          <form className="facet-form" 
+          <form className="facet-form facet-resizeable-input-container" 
                 onSubmit={handleSubmit}
                 onClick={stopTheProp}>
             <div className="form-resizer">{name.replaceAll(' ', '\xa0')}</div>

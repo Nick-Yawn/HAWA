@@ -152,7 +152,8 @@ export default function Feature(props) {
       {routes.map( (route, i) => ( 
         <Route route={route} key={i} />
       ))}
-      <RouteForm />
+      <RouteForm  setAFormActive={setAFormActive}
+                  aFormActive={aFormActive} />
     </div>
   );
 }
