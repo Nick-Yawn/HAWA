@@ -12,6 +12,7 @@ export default function RouteForm(props) {
   const [ path, setPath ]     = useState('');
   const [ label, setLabel ]   = useState('');
   const [ error, setError ]   = useState(false);
+  const typeRef = useRef(null);
 
   useEffect(()=>{
     if( !aFormActive ){
@@ -22,8 +23,27 @@ export default function RouteForm(props) {
     }
   },[aFormActive]);
 
-  const handleSubmit = e => {
+  useEffect(()=>{
+    if( formActive )
+      typeRef.current.focus();
+  },[formActive])
+
+  const handleSubmit = async e => {
     e.preventDefault();
+    if( path === '' ){
+      setError("Path is required.");
+      return;
+    } else if( path.length > 80 ){
+      setError("Path is limited to 80 characters.");
+      return;
+    }
+    /*
+    const newRoute = await dispatch(postRoute({
+      type,
+      method: (type === "API" ? method : null),
+      path,
+      label
+    }))*/
   }
 
   const showForm = e => {
@@ -39,8 +59,22 @@ export default function RouteForm(props) {
   }; 
 
   const handleTypeKeyDown = e => {
+    e.stopPropagation();
     if( e.key === 'Enter' ){
       e.target.click();
+    } else if ( e.key === 'Escape') {
+      setFormActive(false);
+    }
+  }
+
+  const handleEscapeKeyDown = e => {
+    if( e.key === 'Escape' ){
+      setFormActive(false);
+      setError(null);
+      setPath('');
+      setLabel('');
+    } else if( e.key === 'Enter' ){
+      handleSubmit(e);
     }
   }
 
@@ -56,6 +90,7 @@ export default function RouteForm(props) {
      setPath(e.target.value)
     }
   };
+  const updateLabel = e => setLabel(e.target.value);
   
   const stopTheProp = e => e.stopPropagation();
 
@@ -73,14 +108,19 @@ export default function RouteForm(props) {
         <form className="facet-form"
               onClick={stopTheProp}
               onSubmit={handleSubmit}>
-          <div  className={`facet-name route-type route-input route-input-type route-${type}`}  
+          
+          {/* type: Front-End / API */}
+          <div className={`facet-name route-type route-input route-input-type route-${type}`}  
                 onClick={handleTypeClick}
                 onKeyDown={handleTypeKeyDown}
-                tabIndex="0">
+                tabIndex="0"
+                ref={typeRef}>
             {type}
           </div>
+
+          {/* Method, if type is API */}
           {type === "API" && 
-          <select value={method} onChange={updateMethod}>
+          <select value={method} onChange={updateMethod} onKeyDown={handleEscapeKeyDown}>
               <option>GET</option>
               <option>POST</option>
               <option>PUT</option>
@@ -88,15 +128,35 @@ export default function RouteForm(props) {
               <option>DELETE</option>
             </select>
           }
+
+          {/* path */}
           <div className="facet-resizeable-input-container route-input-container">
             <div className="form-resizer route-path-resizer">{path}</div>
-          <input  type="text"
-                  value={path}
-                  onChange={updatePath}
-                  placeholder={ type === "API" ? "/api/resource" : "/path"  }
-                  className="facet-input route-path-input"
-          />
+            <input  type="text"
+                    value={path}
+                    onKeyDown={handleEscapeKeyDown}
+                    onChange={updatePath}
+                    placeholder={ type === "API" ? "/api/resource" : "/path"  }
+                    className="facet-input route-path-input"
+            />
           </div>
+
+          {/* label */}
+          <div className="facet-resizeable-input-container route-input-container">
+            <div className="form-resizer">{path}</div>
+            <input  type="text"
+                    value={label}
+                    onKeyDown={handleEscapeKeyDown}
+                    onChange={updateLabel}
+                    placeholder="description"
+                    className="facet-input"
+            />
+          </div>
+          { error && (
+            <div className="facet-name facet-error">
+              {error}
+            </div>
+          )} 
         </form>
       }
     </div>

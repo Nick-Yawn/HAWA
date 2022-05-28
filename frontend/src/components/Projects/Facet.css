@@ -47,10 +47,16 @@ select {
 
 .add-route-label {
   min-width: min-content;
+  border: 1px solid black;
 }
 
 .route-type {
   min-width: max-content;
+}
+
+.route-type:focus {
+  border: 1px cyan solid;
+  outline: none;
 }
 
 .route-input-type:hover {
@@ -93,6 +99,7 @@ select {
 
 .route-input-type {
   user-select: none;
+  border: 1px solid black;
 }
 
 .facet-input {
