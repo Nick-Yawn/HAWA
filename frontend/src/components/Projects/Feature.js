@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { postFeature, deleteFeature, editFeature } from '../../store/projects';
 import { useParams } from 'react-router-dom';
 import Route from './Route';
+import RouteForm from './RouteForm';
 
 import './Facet.css';
 
@@ -151,6 +152,7 @@ export default function Feature(props) {
       {routes.map( (route, i) => ( 
         <Route route={route} key={i} />
       ))}
+      <RouteForm />
     </div>
   );
 }

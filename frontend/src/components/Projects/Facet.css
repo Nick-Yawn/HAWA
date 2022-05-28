@@ -35,6 +35,10 @@
   padding: 7px;
 }
 
+.add-route-label {
+  min-width: min-content;
+}
+
 .route-type {
   min-width: max-content;
 }
