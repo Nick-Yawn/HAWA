@@ -22,7 +22,18 @@ export default function Feature(props) {
   const editRef = useRef(null);
 
   const routes = Object.values(feature.routes);
-  routes.sort((a,b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+  console.log(routes);
+  routes.sort((a,b) => {
+    if( a.type != b.type ){
+      if( a.type === "Front-End" )
+        return -1
+      else 
+        return 1
+    } else {
+      return Date.parse(a.created_at) - Date.parse(b.created_at)
+    }
+
+  });
 
 
   // add this facet if it exists to sidebar 
