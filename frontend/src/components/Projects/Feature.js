@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { postFeature, deleteFeature, editFeature } from '../../store/projects';
 import { useParams } from 'react-router-dom';
+import Route from './Route';
 
 import './Facet.css';
 
@@ -19,13 +20,18 @@ export default function Feature(props) {
   const [ linkIndex, setLinkIndex ]   = useState(null);
   const editRef = useRef(null);
 
+  const routes = Object.values(feature.routes);
+  routes.sort((a,b) => Date.parse(a.created_at) - Date.parse(b.created_at));
+
+
   // add this facet if it exists to sidebar 
+  /*
   useEffect(()=>{
     if( feature ) setLinks( prevLinks => { 
       setLinkIndex(prevLinks.length);
       return [...prevLinks, feature.name];
     })
-  },[])
+  },[])*/
 
   useEffect(()=>{
     if( error )
@@ -141,8 +147,10 @@ export default function Feature(props) {
         )}
         <button className="facet-button" onClick={showEdit}> Edit </button>
         <button className="facet-button facet-delete" onClick={handleDelete}> Delete </button>
-      </div>
-      
+      </div> 
+      {routes.map( (route, i) => ( 
+        <Route route={route} key={i} />
+      ))}
     </div>
   );
 }

@@ -1,12 +1,16 @@
 .facet-header {
-  padding: 14px;
-
+  margin-bottom: 14px;
   display: flex;
   gap: 14px;
+  margin-top: 7px;
 }
 
 .facet-header:hover {
   cursor: default;
+}
+
+.facet-container {
+  margin-left: 28px;
 }
 
 .facet-form:hover {
@@ -23,6 +27,37 @@
   padding: 14px;
   font-size: 18px;
   font-weight: 300;
+}
+
+.route-header {
+  margin-bottom: 7px;
+  margin-left: 28px;
+  padding: 7px;
+}
+
+.route-type {
+  min-width: max-content;
+}
+
+.route-Front-End {
+  color: limegreen;
+}
+
+.route-API {
+  color: orange;
+}
+
+.route-method {
+  min-width: min-content;
+}
+
+.route-path {
+  min-width: max-content; 
+  font-family: monospace;
+}
+
+.route-label {
+  min-width: max-content; 
 }
 
 .add-facet-label {

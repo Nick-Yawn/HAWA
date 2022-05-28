@@ -47,9 +47,10 @@ export default function Project() {
           )*/}
         </div>
         <div className="project-main" onClick={handleBGClick}>
-          { features.map( feature => (
+          { features.map( (feature, i) => (
             <Feature  feature={feature} 
                       aFormActive={aFormActive}
+                      key={i}
                       setAFormActive={setAFormActive}
                       setLinks={setLinks} />
           ))}
