@@ -155,7 +155,8 @@ export default function Feature(props) {
         <Route route={route} key={i} />
       ))}
       <RouteForm  setAFormActive={setAFormActive}
-                  aFormActive={aFormActive} />
+                  aFormActive={aFormActive} 
+                  feature_id={feature.id}/>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
+import { postRoute } from '../../store/projects';
 
 export default function RouteForm(props) {
-  const { setAFormActive, aFormActive } = props;
+  const { setAFormActive, aFormActive, feature_id } = props;
   const dispatch = useDispatch();
   const project_id = +useParams().project_id;
   const [ formActive, setFormActive] = useState(false);
@@ -37,13 +38,20 @@ export default function RouteForm(props) {
       setError("Path is limited to 80 characters.");
       return;
     }
-    /*
     const newRoute = await dispatch(postRoute({
       type,
       method: (type === "API" ? method : null),
       path,
-      label
-    }))*/
+      label,
+      project_id,
+      feature_id
+    }))
+
+    if( newRoute.id ){
+      setPath('');
+      setLabel('');
+      typeRef.current.focus();
+    }
   }
 
   const showForm = e => {
@@ -67,7 +75,12 @@ export default function RouteForm(props) {
     }
   }
 
-  const handleEscapeKeyDown = e => {
+  const handleMethodKeyDown = e => {
+    if( e.key === 'Enter' )
+      e.stopPropagation();
+  }
+
+  const handleTextInputKeyDown = e => {
     if( e.key === 'Escape' ){
       setFormActive(false);
       setError(null);
@@ -120,7 +133,7 @@ export default function RouteForm(props) {
 
           {/* Method, if type is API */}
           {type === "API" && 
-          <select value={method} onChange={updateMethod} onKeyDown={handleEscapeKeyDown}>
+          <select value={method} onChange={updateMethod} onKeyDown={handleMethodKeyDown}>
               <option>GET</option>
               <option>POST</option>
               <option>PUT</option>
@@ -134,22 +147,22 @@ export default function RouteForm(props) {
             <div className="form-resizer route-path-resizer">{path}</div>
             <input  type="text"
                     value={path}
-                    onKeyDown={handleEscapeKeyDown}
+                    onKeyDown={handleTextInputKeyDown}
                     onChange={updatePath}
                     placeholder={ type === "API" ? "/api/resource" : "/path"  }
-                    className="facet-input route-path-input"
+                    className={"facet-input route-path-input " + (path.length > 80 ? "bad-input" : "")}
             />
           </div>
 
           {/* label */}
           <div className="facet-resizeable-input-container route-input-container">
-            <div className="form-resizer">{path}</div>
+            <div className="form-resizer">{label}</div>
             <input  type="text"
                     value={label}
-                    onKeyDown={handleEscapeKeyDown}
+                    onKeyDown={handleTextInputKeyDown}
                     onChange={updateLabel}
                     placeholder="description"
-                    className="facet-input"
+                    className={"facet-input " + (label.length > 255 ? "bad-input" : "")}
             />
           </div>
           { error && (
