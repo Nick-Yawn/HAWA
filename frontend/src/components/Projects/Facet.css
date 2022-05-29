@@ -44,6 +44,8 @@ select {
   margin-bottom: 7px;
   margin-left: 28px;
   padding: 7px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .add-route-label {
@@ -73,7 +75,8 @@ select {
 }
 
 .route-method {
-  min-width: min-content;
+  width: 65px;
+  min-width: max-content;
 }
 
 .route-path {
