@@ -172,15 +172,26 @@ export const editFeature = feature => async dispatch => {
 }
 
 // ROUTES
-const POST_ROUTE = 'routes/POST_ROUTE'
+const POST_ROUTE    = 'routes/POST_ROUTE'
+const PUT_ROUTE     = 'routes/PUT_ROUTE'
+const DELETE_ROUTE  = 'routes/DELETE_ROUTE'
 
 const postRouteAction = route => ({
   type: POST_ROUTE,
   route
 })
 
+const putRouteAction = route => ({
+  type: PUT_ROUTE,
+  route
+})
+
+const deleteRouteAction = route => ({
+  type: DELETE_ROUTE,
+  route
+})
+
 export const postRoute = route => async dispatch => {
-  console.log(route);
   const response = await fetch(`/api/features/${route.feature_id}/routes`,{
     method: 'POST',
     headers: {"Content-Type": "application/json"},
@@ -195,6 +206,39 @@ export const postRoute = route => async dispatch => {
   } else {
     console.log(data.errors);
   }
+}
+
+export const putRoute = route => async dispatch => {
+  const response = await fetch(`/api/routes/${route.id}`,{
+    method: 'PUT',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(route)
+  });
+
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(postRouteAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
+}
+
+export const deleteRoute = route => async dispatch => {
+  const response = await fetch(`/api/routes/${route.id}`,{
+    method: 'DELETE'
+  });
+
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(deleteRouteAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
+
 }
 
 //        
@@ -250,6 +294,17 @@ export default function projects(state = [], action) {
       const feature = features[action.route.feature_id];
       const routes = feature.routes;
       routes[action.route.id] = action.route;
+      feature.routes = {...feature.routes};
+      project.features = {...features};
+      newState[action.route.project_id] = {...project};
+      return newState;
+    }
+    case DELETE_ROUTE:{
+      const project = newState[action.route.project_id];
+      const features = project.features;
+      const feature = features[action.route.feature_id];
+      const routes = feature.routes;
+      delete routes[action.route.id];
       feature.routes = {...feature.routes};
       project.features = {...features};
       newState[action.route.project_id] = {...project};
