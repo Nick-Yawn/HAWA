@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import current_user, login_required
 from backend.models import User, Project, db, Feature
 from backend.forms.project_form import ProjectForm
+from backend.conversion import generateConversions
 
 project_routes = Blueprint('projects', __name__)
 
@@ -78,6 +79,23 @@ def post_feature(id):
   db.session.add(feature)
   db.session.commit()
   return feature.to_dict()
+
+# get conversions
+@project_routes.route('/<int:id>/conversions', methods = ['GET'])
+@login_required
+def get_conversions(id):
+    statement = db.select(Project) \
+                    .options(db.joinedload('*')) \
+                    .where(Project.id == id)
+    project = db.session.execute(statement).unique().scalar()
+   
+    if project is None:
+        return {'errors':['Project not found']}, 404
+
+    conversions = generateConversions(project)
+
+    return {'conversions':conversions}
+
 
 @project_routes.errorhandler(500)
 def internal_server_error(e):

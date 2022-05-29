@@ -6,6 +6,7 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import Projects from './components/Projects';
 import Project from './components/Projects/Project';
+import Conversions from './components/Projects/Conversions';
 import Splash from './components/Splash';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
@@ -44,6 +45,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/projects/:project_id' exact={true}>
           <Project />
+        </ProtectedRoute>
+        <ProtectedRoute path='/projects/:project_id/conversions' exact={true}>
+          <Conversions />
         </ProtectedRoute>
         <Route path='/project-test'>
           <Project />
