@@ -19,6 +19,7 @@
   border-radius: 12px;
   width: max-content;
   min-width: 200px;
+  border: 1px solid transparent;
 
   padding: 14px;
   font-size: 18px;
@@ -105,12 +106,12 @@ select {
 .facet-input {
   grid-area: a;
   background-color: var(--dark-bg); 
-  height: 50px;
+  height: 52px;
   min-width: 228px;
   width: 100%;
   margin: 0;
   text-align: left;
-  padding-left: 13px;
+  padding-left: 14px;
   box-sizing: border-box;
 }
 
