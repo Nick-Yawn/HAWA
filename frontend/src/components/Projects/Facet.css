@@ -3,6 +3,7 @@
   display: flex;
   gap: 14px;
   margin-top: 14px;
+  width: max-content;
 }
 
 .facet-header:hover {
