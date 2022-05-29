@@ -21,7 +21,5 @@ def generateConversions(project):
             rxfstr += '### API \r\n'
             rxfstr += apiroutes
         counter += 1
-        
-    print(rxfstr) 
 
     return [rxfstr]

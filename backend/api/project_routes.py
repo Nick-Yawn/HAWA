@@ -87,7 +87,7 @@ def get_conversions(id):
     statement = db.select(Project) \
                     .options(db.joinedload('*')) \
                     .where(Project.id == id)
-    project = db.session.execute(statement).unique().scalar()
+    project = db.session.execute(statement).unique().scalar() #notice singular 'scalar'; it returns first result
    
     if project is None:
         return {'errors':['Project not found']}, 404
