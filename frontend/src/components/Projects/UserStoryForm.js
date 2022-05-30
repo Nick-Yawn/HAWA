@@ -57,6 +57,7 @@ export function UserStoryForm(props) {
   const [ operation, setOperation ] = useState('CREATE');
   const [ error, setError ]         = useState(null);
   const opRef = useRef(null);
+  const storyRef = useRef(null);
   const id = userStory?.id;
 
   useEffect(()=>{
@@ -68,7 +69,7 @@ export function UserStoryForm(props) {
   },[aFormActive]);
 
   useEffect(()=>{
-    if( formActive )
+    if( formActive && !userStory )
       opRef.current.focus();
     if( userStory ){
       setOperation( userStory.operation || '');
@@ -124,9 +125,12 @@ export function UserStoryForm(props) {
       }));
 
       if( newUserStory ){
-        setStory('');
+        if( story.split(',')[0].toLowerCase().startsWith('as') )
+          setStory(story.split(',')[0] + ', ');
+        else
+          setStory('');
         setOperation(nextOperation(operation));
-        opRef.current.focus();
+        storyRef.current.focus();
       }
     }
   }  
@@ -167,6 +171,7 @@ export function UserStoryForm(props) {
       <div className="facet-resizeable-input-container route-input-container">
         <div className="form-resizer">{story}</div>
         <input  type="text"
+                ref={storyRef}
                 value={story}
                 onKeyDown={handleTextInputKeyDown}
                 onChange={updateStory}

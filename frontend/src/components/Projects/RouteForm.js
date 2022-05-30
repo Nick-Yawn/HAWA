@@ -71,7 +71,7 @@ export function RouteForm(props) {
   },[aFormActive]);
 
   useEffect(()=>{
-    if( formActive )
+    if( formActive && !route )
       typeRef.current.focus();
     if( route ){
       setType(route.type);
