@@ -241,6 +241,48 @@ export const deleteRoute = route => async dispatch => {
 
 }
 
+// USER STORY
+const POST_USER_STORY = 'userStories/PUT'
+
+const postUserStoryAction = userStory => ({
+  type: POST_USER_STORY,
+  userStory
+})
+
+export const postUserStory = userStory => async dispatch => {
+  const response = await fetch(`/api/features/${userStory.feature_id}/user-stories`,{
+    method: 'POST',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(userStory)
+  });
+  
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(postUserStoryAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
+}
+
+export const putUserStory = userStory => async dispatch => {
+  const response = await fetch(`/api/user-stories/${userStory.id}`,{
+    method: 'PUT',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(userStory)
+  });
+  
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(postUserStoryAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
+}
+
 //        
 // REDUCER
 //        
@@ -308,6 +350,17 @@ export default function projects(state = [], action) {
       feature.routes = {...feature.routes};
       project.features = {...features};
       newState[action.route.project_id] = {...project};
+      return newState;
+    }
+    case POST_USER_STORY:{
+      const project = newState[action.userStory.project_id];
+      const features = project.features;
+      const feature = features[action.userStory.feature_id];
+      const user_stories = feature.user_stories;
+      user_stories[action.userStory.id] = action.userStory;
+      feature.user_stories = {...feature.user_stories};
+      project.features = {...features};
+      newState[action.userStory.project_id] = {...project};
       return newState;
     }
     default:

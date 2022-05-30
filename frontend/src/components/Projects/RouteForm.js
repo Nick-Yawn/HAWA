@@ -102,7 +102,7 @@ export function RouteForm(props) {
           id
         }));
 
-        if( editedRoute.id ){
+        if( editedRoute ){
           setAFormActive(false);
         }
     } else {
@@ -115,7 +115,7 @@ export function RouteForm(props) {
         feature_id
       }));
 
-      if( newRoute.id ){
+      if( newRoute ){
         setPath('');
         setLabel('');
         typeRef.current.focus();
@@ -152,7 +152,6 @@ export function RouteForm(props) {
     e.stopPropagation();
     setType("Front-EndAPI".replace(type, ""))
   }
-
   
   const updateType = e => setType(e.target.value);
   const updateMethod = e => setMethod(e.target.value);
@@ -216,7 +215,9 @@ export function RouteForm(props) {
           {error}
         </div>
       )} 
+
       { route && <button className="facet-button" onClick={handleSubmit}> Submit </button>}
+
     </form>
  );
 

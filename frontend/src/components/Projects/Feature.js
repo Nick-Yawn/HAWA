@@ -4,6 +4,9 @@ import { postFeature, deleteFeature, editFeature } from '../../store/projects';
 import { useParams } from 'react-router-dom';
 import Route from './Route';
 import RouteFormWrapper from './RouteForm';
+import UserStory from './UserStory';
+import UserStoryFormWrapper from './UserStoryForm';
+
 
 import './Facet.css';
 
@@ -31,9 +34,10 @@ export default function Feature(props) {
     } else {
       return Date.parse(a.created_at) - Date.parse(b.created_at)
     }
-
   });
 
+  const userStories = Object.values(feature.user_stories);
+  userStories.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) );
 
   // add this facet if it exists to sidebar 
   /*
@@ -173,6 +177,17 @@ export default function Feature(props) {
                 setAFormActive={setAFormActive}/>
       ))}
       <RouteFormWrapper  setAFormActive={setAFormActive}
+                  aFormActive={aFormActive} 
+                  feature_id={feature.id}/>
+
+      {userStories.map( (story, i) => (
+        <UserStory  userStory={story} 
+                    aFormActive={aFormActive}
+                    feature_id={feature.id}
+                    setAFormActive={setAFormActive}
+                    key={i}/>
+      ))}
+      <UserStoryFormWrapper setAFormActive={setAFormActive}
                   aFormActive={aFormActive} 
                   feature_id={feature.id}/>
     </div>

@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from backend.models import User, Project, Feature, Route, db
+from backend.models import User, Project, Feature, Route, UserStory, db
 
 feature_routes = Blueprint('features', __name__)
 
@@ -10,9 +10,12 @@ feature_routes = Blueprint('features', __name__)
 def delete_feature(id):
     feature = Feature.query.get(id)
 
+    # TODO: JOIN LOAD
     project_id = feature.project_id
+    project = Project.query.get(project_id)
+    if current_user.id != project.user_id:
+        return {'errors':['Post forbidden']}, 403
 
-    # TODO: CHECK PERMISSIONS
 
     db.session.delete(feature)
     db.session.commit()
@@ -23,6 +26,12 @@ def delete_feature(id):
 @login_required
 def edit_feature(id):
     feature = Feature.query.get(id)
+    
+    # TODO: JOIN LOAD
+    project_id = feature.project_id
+    project = Project.query.get(project_id)
+    if current_user.id != project.user_id:
+        return {'errors':['Post forbidden']}, 403
 
     name = request.json['name']
 
@@ -39,8 +48,8 @@ def edit_feature(id):
 @login_required
 def post_route(id):
     project_id = request.json['project_id']
-    project = Project.query.get(project_id)
 
+    project = Project.query.get(project_id)
     if current_user.id != project.user_id:
         return {'errors':['Post forbidden']}, 403
     
@@ -57,6 +66,24 @@ def post_route(id):
     db.session.commit()
 
     return route.to_dict()
+
+@feature_routes.route('/<int:id>/user-stories', methods=['POST'])
+@login_required
+def post_user_story(id):
+    project_id = request.json['project_id']
+    project = Project.query.get(project_id)
+
+    if current_user.id != project.user_id:
+        return {'errors':['Post forbidden']}, 403
+
+    operation = request.json['operation']
+    story     = request.json['story']
+
+    user_story = UserStory(operation=operation, story=story, project_id=project_id, feature_id=id)
+    db.session.add(user_story)
+    db.session.commit()
+    
+    return user_story.to_dict()
 
 @feature_routes.errorhandler(500)
 def error_handler(e):
