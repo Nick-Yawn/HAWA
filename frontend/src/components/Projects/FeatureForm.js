@@ -58,8 +58,10 @@ export default function FeatureForm(props) {
       return;
     }
     const newFeature = await dispatch(postFeature( {name, project_id} ))
+
     if( newFeature.id ){
       setName('');
+      formRef.current.scrollIntoView();
     }
   };
 
