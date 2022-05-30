@@ -36,7 +36,7 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-top: 14px;
   box-sizing: border-box;
 }
