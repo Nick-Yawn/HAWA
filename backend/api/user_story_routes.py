@@ -9,7 +9,8 @@ user_story_routes = Blueprint('user-stories', __name__)
 def put_user_story(id):
     user_story = UserStory.query.get(id)
 
-    user_story.operation = request.json['operation']
+    op = request.json['operation']
+    user_story.operation = op if op else None 
     user_story.story     = request.json['story']
 
     db.session.commit()

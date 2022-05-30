@@ -57,7 +57,9 @@ function Conversion({ conversion }){
 
   return (
     <div className="conversion">
-      <span className="conversion-text">{conversion.name}</span>  
+      <span className="conversion-text">{conversion.name.split(' by ')[0]}</span>  
+      <span className="conversion-text">by</span>  
+      <span className="conversion-text">{conversion.name.split(' by ')[1]}</span>  
       <button className="copy-button" onClick={copyToClipboard}>{ copied ? 'Copied!' : 'Copy to Clipboard' }</button>
     </div>
   );

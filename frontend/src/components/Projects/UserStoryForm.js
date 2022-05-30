@@ -71,7 +71,7 @@ export function UserStoryForm(props) {
     if( formActive )
       opRef.current.focus();
     if( userStory ){
-      setOperation(userStory.operation || 'CREATE');
+      setOperation( userStory.operation || '');
       setStory(userStory.story || '');
     }
   },[formActive])
@@ -87,7 +87,7 @@ export function UserStoryForm(props) {
       case 'DELETE':
         return 'CREATE';
       default:
-        return 'CREATE';
+        return '';
     }
   }
 
@@ -161,6 +161,7 @@ export function UserStoryForm(props) {
         <option>READ</option>
         <option>UPDATE</option>
         <option>DELETE</option>
+        <option></option>
       </select>
 
       <div className="facet-resizeable-input-container route-input-container">

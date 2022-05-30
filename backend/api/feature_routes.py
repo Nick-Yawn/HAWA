@@ -76,7 +76,8 @@ def post_user_story(id):
     if current_user.id != project.user_id:
         return {'errors':['Post forbidden']}, 403
 
-    operation = request.json['operation']
+    op = request.json['operation']
+    operation = op if op else None 
     story     = request.json['story']
 
     user_story = UserStory(operation=operation, story=story, project_id=project_id, feature_id=id)
