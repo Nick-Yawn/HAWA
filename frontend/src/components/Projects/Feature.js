@@ -159,8 +159,12 @@ export default function Feature(props) {
             {error}
           </div>
         )}
-        {/*<button className="facet-button" onClick={showEdit}> Edit </button>*/}
-        {editActive && <button className="facet-button facet-delete" onClick={handleDelete}> Delete </button>}
+        {editActive && 
+          <>
+            <button className="facet-button" onClick={handleEdit}> Submit </button>
+            <button className="facet-button facet-delete" onClick={handleDelete}> Delete </button>
+          </>
+        }
       </div> 
       {routes.map( (route, i) => ( 
         <Route  route={route} 

@@ -216,6 +216,7 @@ export function RouteForm(props) {
           {error}
         </div>
       )} 
+      { route && <button className="facet-button" onClick={handleSubmit}> Submit </button>}
     </form>
  );
 

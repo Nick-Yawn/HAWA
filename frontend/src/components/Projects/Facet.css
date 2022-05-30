@@ -157,8 +157,13 @@ select {
   min-width: min-content;
 }
 
+.facet-delete {
+  border: 1px solid red;
+}
+
 .facet-delete:hover {
   border: 1px solid red;
+  color: red;
 }
 
 .bad-input {
