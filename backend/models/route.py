@@ -30,6 +30,8 @@ class Route(db.Model):
     feature_id  = db.Column(db.Integer, db.ForeignKey("features.id"), nullable=False)
     project_id  = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
 
+    # TODO: project relational map for auth check
+
     def to_dict(self):
         return {
             'id':     self.id,
@@ -37,6 +39,7 @@ class Route(db.Model):
             'method': self.method.name if isinstance(self.method, Enum) else None,
             'path':   self.path,
             'label':  self.label,
+            'created_at': self.created_at,
             'feature_id': self.feature_id,
             'project_id': self.project_id
                 }

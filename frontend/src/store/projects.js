@@ -173,16 +173,10 @@ export const editFeature = feature => async dispatch => {
 
 // ROUTES
 const POST_ROUTE    = 'routes/POST_ROUTE'
-const PUT_ROUTE     = 'routes/PUT_ROUTE'
 const DELETE_ROUTE  = 'routes/DELETE_ROUTE'
 
 const postRouteAction = route => ({
   type: POST_ROUTE,
-  route
-})
-
-const putRouteAction = route => ({
-  type: PUT_ROUTE,
   route
 })
 
@@ -239,6 +233,69 @@ export const deleteRoute = route => async dispatch => {
     console.log(data.errors);
   }
 
+}
+
+// USER STORY
+const POST_USER_STORY = 'userStories/PUT'
+const DELETE_USER_STORY = 'userStories/DELETE'
+
+const postUserStoryAction = userStory => ({
+  type: POST_USER_STORY,
+  userStory
+})
+
+const deleteUserStoryAction = userStory => ({
+  type: DELETE_USER_STORY,
+  userStory
+})
+
+export const postUserStory = userStory => async dispatch => {
+  const response = await fetch(`/api/features/${userStory.feature_id}/user-stories`,{
+    method: 'POST',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(userStory)
+  });
+  
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(postUserStoryAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
+}
+
+export const putUserStory = userStory => async dispatch => {
+  const response = await fetch(`/api/user-stories/${userStory.id}`,{
+    method: 'PUT',
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(userStory)
+  });
+  
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(postUserStoryAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
+}
+
+export const deleteUserStory = userStory => async dispatch => {
+  const response = await fetch(`/api/user-stories/${userStory.id}`,{
+    method: 'DELETE'
+  })
+
+  const data = await response.json();
+
+  if( response.ok ){
+    await dispatch(deleteUserStoryAction(data));
+    return data;
+  } else {
+    console.log(data.errors);
+  }
 }
 
 //        
@@ -308,6 +365,28 @@ export default function projects(state = [], action) {
       feature.routes = {...feature.routes};
       project.features = {...features};
       newState[action.route.project_id] = {...project};
+      return newState;
+    }
+    case POST_USER_STORY:{
+      const project = newState[action.userStory.project_id];
+      const features = project.features;
+      const feature = features[action.userStory.feature_id];
+      const user_stories = feature.user_stories;
+      user_stories[action.userStory.id] = action.userStory;
+      feature.user_stories = {...feature.user_stories};
+      project.features = {...features};
+      newState[action.userStory.project_id] = {...project};
+      return newState;
+    }
+    case DELETE_USER_STORY:{
+      const project = newState[action.userStory.project_id];
+      const features = project.features;
+      const feature = features[action.userStory.feature_id];
+      const user_stories = feature.user_stories;
+      delete user_stories[action.userStory.id];
+      feature.user_stories = {...feature.user_stories};
+      project.features = {...features};
+      newState[action.userStory.project_id] = {...project};
       return newState;
     }
     default:

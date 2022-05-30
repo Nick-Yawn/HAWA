@@ -169,3 +169,11 @@ select {
 .bad-input {
   color: red;
 }
+
+.user-story-operation {
+  min-width: 70px;
+}
+
+.user-story-story-input {
+  min-width: 300px;
+}
