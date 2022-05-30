@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { UserStoryForm } from './UserStoryForm';
+import { deleteUserStory } from '../../store/projects';
 
 export default function UserStory(props){
   const {
@@ -24,7 +25,7 @@ export default function UserStory(props){
   }
 
   const handleDelete = e => {
-  //  dispatch(deleteRoute(route));
+    dispatch(deleteUserStory(userStory));
   }
 
   return(

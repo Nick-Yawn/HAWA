@@ -15,3 +15,13 @@ def put_user_story(id):
     db.session.commit()
 
     return user_story.to_dict()
+
+@user_story_routes.route('<int:id>', methods=['DELETE'])
+@login_required
+def delete_user_story(id):
+    user_story = UserStory.query.get(id)
+
+    db.session.delete(user_story)
+    db.session.commit()
+
+    return user_story.to_dict()
