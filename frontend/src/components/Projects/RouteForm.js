@@ -139,6 +139,7 @@ export function RouteForm(props) {
               setPath('/api/');
               break;
             case "POST":
+              setPath('/api/' + path.split('/').at(-1))
               break;
             case "PUT":
             case "PATCH":
