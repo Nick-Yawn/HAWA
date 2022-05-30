@@ -2,6 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from enum import Enum
+from datetime import datetime
 
 class RoleEnum(Enum):
     user = 1
@@ -15,8 +16,13 @@ class User(db.Model, UserMixin):
     email           = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     role            = db.Column(db.Enum(RoleEnum), nullable=False, default="user")
+    last_login      = db.Column(db.DateTime(timezone = True))
 
     projects = db.relationship('Project', back_populates='user')
+
+    def updateLastLogin(self):
+        self.last_login = datetime.now()
+        db.session.commit()
 
     @property
     def password(self):
