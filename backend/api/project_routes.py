@@ -92,7 +92,9 @@ def get_conversions(id):
     if project is None:
         return {'errors':['Project not found']}, 404
 
-
+    project.user.updateLastExport()
+    db.session.commit()
+    
     conversions = generateConversions(project)
 
     return {'conversions':conversions}
