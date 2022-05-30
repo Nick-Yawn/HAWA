@@ -54,7 +54,7 @@ export function RouteForm(props) {
   const project_id = +useParams().project_id;
   const [ type, setType ]     = useState('Front-End');
   const [ method, setMethod ] = useState('GET');
-  const [ path, setPath ]     = useState('');
+  const [ path, setPath ]     = useState('/');
   const [ label, setLabel ]   = useState('');
   const [ error, setError ]   = useState(false);
   const typeRef = useRef(null);
@@ -80,6 +80,23 @@ export function RouteForm(props) {
       setLabel(route.label || '');
     }
   },[formActive])
+
+  const getNextMethod = method => {
+    switch (method) {
+      case "GET":
+        return "POST"
+      case "POST":
+        return "PUT"
+      case "PUT":
+        // fall-through
+      case "PATCH":
+        return "DELETE"
+      case "DELETE":
+        return "GET"
+      default:
+        return "GET"
+    }
+  }
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -116,7 +133,24 @@ export function RouteForm(props) {
       }));
 
       if( newRoute ){
-        setPath('');
+        if( type === "API" ){
+          switch( method ){
+            case "GET":
+              setPath('/api/');
+              break;
+            case "POST":
+              break;
+            case "PUT":
+            case "PATCH":
+              break;
+            case "DELETE":
+              setPath('/api/')
+              break;
+          }
+          setMethod(getNextMethod(method));
+        } else {
+          setPath('/'); 
+        }
         setLabel('');
         typeRef.current.focus();
       }
@@ -150,7 +184,14 @@ export function RouteForm(props) {
 
   const handleTypeClick = e => {
     e.stopPropagation();
-    setType("Front-EndAPI".replace(type, ""))
+    const newType = "Front-EndAPI".replace(type, "")
+    setType(newType);
+    if( newType === 'API' ){
+      setPath('/api/')
+    } else {
+      setPath('/')
+    }
+
   }
   
   const updateType = e => setType(e.target.value);
