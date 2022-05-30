@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
-import DemoUserPanel from './DemoUserPanel';
 
 import './SignUpForm.css';
 
@@ -40,9 +39,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="signup-form-container">
       <div className="signup-form-and-demo-panel">
-        <DemoUserPanel path={'/login'} text={'Login'} />
         <form className="signup-form" onSubmit={onSignUp}>
           <div className="signup-form-title">Sign Up</div>
           <div className="signup-errors">
@@ -91,7 +88,6 @@ const SignUpForm = () => {
           <button type='submit'>Sign Up</button>
         </form>
       </div>
-    </div>
   );
 };
 

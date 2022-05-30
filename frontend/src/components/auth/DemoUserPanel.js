@@ -14,7 +14,7 @@ export default function DemoUserPanel({path, text}){
 
   return (
     <div className="demo-user-panel">
-      <button onClick={demoLoginFunc} className="get-started-button">Demo User</button>
+      <button onClick={demoLoginFunc} id="demo-user-button" className="get-started-button">Demo User</button>
     </div>
   );
 }

@@ -34,9 +34,9 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="login-form-container">
       <div className="login-form-and-demo-panel"> 
-        <DemoUserPanel text={'Sign Up'} path={'/sign-up'} />
+        <div className="flex-spacer" />
+        <DemoUserPanel />
         <form className="login-form" onSubmit={onLogin}>
           <div className="login-title">Login</div>
           <div className="login-errors">
@@ -65,7 +65,6 @@ const LoginForm = () => {
           <button type='submit'>Login</button>
         </form>
       </div>
-    </div>
   );
 };
 

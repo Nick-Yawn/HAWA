@@ -4,3 +4,7 @@
   flex-direction: column;
   align-items: center;
 }
+
+#demo-user-button {
+  margin: 0;
+}

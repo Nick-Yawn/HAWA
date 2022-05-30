@@ -1,0 +1,15 @@
+.auth-forms-container {
+  display: flex;
+  align-items: stretch;
+  gap: 28px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.auth-main {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -16,11 +16,9 @@
 
 .login-form-and-demo-panel {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap-reverse;
-  gap: 25px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
 }
 
 .login-form {
