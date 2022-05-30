@@ -15,7 +15,7 @@ export default function Splash() {
         <span className="splash-text splash-copy">HAWA makes CRUD-app planning easy. Create Projects, then add:</span>
         <span className="splash-text splash-copy">Features</span>
         <span className="splash-text splash-copy">Routes</span>
-        <span className="splash-text splash-copy">User Stories*</span>
+        <span className="splash-text splash-copy">User Stories</span>
         <span className="splash-text splash-copy">Acceptance Criteria*</span>
         <span className="splash-text splash-copy">with painless conversion to pre-formatted wiki docs.</span>
         <span className="splash-text splash-copy coming-soon">*Coming soon!</span>
