@@ -1,8 +1,6 @@
-
-
 .sidebar-and-main-container {
   display: flex;
-  height: 100%;
+  height: calc(100% - 55px);
   width: 100%;
 }
 
@@ -36,10 +34,17 @@
   flex: auto;
 
   display: flex;
+  position: relative;
   flex-direction: column;
   overflow-y: scroll;
   padding-top: 14px;
   box-sizing: border-box;
+}
+
+.copy-button {
+  padding: 14px;
+  height: 75px;
+  width: 106px;
 }
 
 .project-page-appear {

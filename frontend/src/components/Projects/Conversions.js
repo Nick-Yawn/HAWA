@@ -1,8 +1,16 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
-export default function Conversions() {
-  const project_id = +useParams().project_id;
+import './Project.css';
+import './Conversions.css';
+
+export default function ConversionsModal(props) {
+  const { 
+          project_id,
+          showConversions,
+          setShowConversions
+        } = props;
+  const history = useHistory();
   const [ loaded, setLoaded ] = useState(false);
   const [ conversions, setConversions ] = useState([]);
 
@@ -11,19 +19,46 @@ export default function Conversions() {
     const data = await response.json();
 
     setConversions(data.conversions);
+    setLoaded(true);
   }
 
   const copyToClipboard = e => {
     navigator.clipboard.writeText(conversions[0])
   }
 
+  const hideModal = e => setShowConversions(false);
+  const redirectToProject = e => history.push(`/projects/${project_id}`);
+  const stopTheProp = e => e.stopPropagation();
+
   return (
-    <>
-    <h1>Conversions</h1>
-      <button onClick={getConversions}>Convert to GFM</button>
-      { conversions.length > 0 && (
-        <button onClick={copyToClipboard}>Copy to Clipboard</button>
-      )}
-    </>
+    <div  className="conversions-background" 
+          onClick={hideModal}>
+      <div className="conversions-modal" onClick={stopTheProp}>
+        <span className="conversion-text">Convert to GitHub Flavored Markdown</span>
+          <button id="convert-button" onClick={getConversions} disabled={loaded}>Generate Conversions</button>
+          <div className="conversions-container">
+          { conversions.map( (c, i) => (
+              <Conversion conversion={c} key={i} />
+            ))}
+          </div>
+      </div>
+    </div>
+  );
+}
+
+function Conversion({ conversion }){
+  const [ copied, setCopied ] = useState(false);
+     
+  const copyToClipboard = e => {
+    navigator.clipboard.writeText(conversion.output);
+    setCopied(true);
+    setTimeout(()=>setCopied(false), 1500)
+  }
+
+  return (
+    <div className="conversion">
+      <span className="conversion-text">{conversion.name}</span>  
+      <button className="copy-button" onClick={copyToClipboard}>{ copied ? 'Copied!' : 'Copy to Clipboard' }</button>
+    </div>
   );
 }

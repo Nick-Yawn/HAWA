@@ -77,3 +77,6 @@ button:disabled {
   color: grey;
 }
 
+button:disabled:hover {
+  cursor: default;
+}
