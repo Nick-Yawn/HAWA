@@ -22,7 +22,6 @@ export default function Feature(props) {
   const editRef = useRef(null);
 
   const routes = Object.values(feature.routes);
-  console.log(routes);
   routes.sort((a,b) => {
     if( a.type != b.type ){
       if( a.type === "Front-End" )
