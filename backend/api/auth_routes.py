@@ -39,7 +39,7 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
+        user = User.query.filter(User.email == form.data['email'].lower()).first()
         login_user(user)
         return user.to_dict()
     return {'errors': ["Invalid username or password."]}, 400
@@ -70,7 +70,7 @@ def sign_up():
     if form.validate_on_submit():
         user = User(
             name=form.data['name'],
-            email=form.data['email'],
+            email=form.data['email'].lower(),
             password=form.data['password']
         )
         db.session.add(user)
