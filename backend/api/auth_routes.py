@@ -24,6 +24,7 @@ def authenticate():
     Authenticates a user.
     """
     if current_user.is_authenticated:
+        current_user.updateLastLogin()
         return current_user.to_dict()
     return {'errors': ['Unauthorized']}, 401
 
