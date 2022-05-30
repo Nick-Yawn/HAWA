@@ -1,0 +1,49 @@
+.conversions-background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.conversions-modal {
+  background-color: var(--nav-bar-bg);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  padding: 28px;
+  backdrop-filter: blur(2px);
+  align-items: center;
+}
+
+.conversion-text {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--font-color);
+}
+
+.conversions-container {
+  display: flex;
+  gap: 28px;
+}
+
+#convert-button {
+  width: max-content;
+  padding: 14px;
+}
+
+.conversion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+

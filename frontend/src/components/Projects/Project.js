@@ -5,6 +5,7 @@ import { CSSTransition } from 'react-transition-group';
 import { readProjects } from '../../store/projects';
 import Feature from './Feature';
 import FeatureForm from './FeatureForm';
+import ConversionsModal from './Conversions';
 
 import './Project.css';
 
@@ -14,8 +15,9 @@ export default function Project() {
   const history = useHistory();
   const project = useSelector( state => state.projects[+project_id] );
   const [ links, setLinks ] = useState([]);
+  const [ showConversions, setShowConversions ] = useState(false);
   const [ aFormActive, setAFormActive ] = useState(false);
-  const [ isLoaded, setIsLoaded ] = useState(false)
+  const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(()=>{
     const func = async () => {
@@ -28,7 +30,9 @@ export default function Project() {
   const features = Object.values(project?.features || {});
   features.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) ); 
 
-  const redirectToConversions = e => history.push(`/projects/${project_id}/conversions`);
+  const openConversions = e => {
+    setShowConversions(true);
+  };
 
   const handleBGClick = e => {
     setAFormActive(false);
@@ -48,7 +52,7 @@ export default function Project() {
           {/*links.map(link => 
             <div className={`sidebar-link ${link.className}`}>{link}</div>
           )*/}
-          <button onClick={redirectToConversions} className="export-button">Export</button>
+          <button onClick={openConversions} className="export-button">Export</button>
         </div>
         <div className="project-main" onClick={handleBGClick}>
           { features.map( (feature, i) => (
@@ -62,6 +66,7 @@ export default function Project() {
                         setAFormActive={setAFormActive}
                         aFormActive={aFormActive}/>
         </div>
+        { showConversions && <ConversionsModal setShowConversions={setShowConversions} project_id={project_id} /> }
       </div>
     </CSSTransition>
   );

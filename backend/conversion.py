@@ -22,4 +22,4 @@ def generateConversions(project):
             rxfstr += apiroutes
         counter += 1
 
-    return [rxfstr]
+    return [{'name':'Routes by Feature', 'output':rxfstr}]
