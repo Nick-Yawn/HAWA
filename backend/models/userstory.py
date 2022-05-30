@@ -25,6 +25,7 @@ class UserStory(db.Model):
         return {
             'id':         self.id,
             'story':      self.story,
+            'operation':  self.operation.name if isinstance(self.operation, Enum) else None,
             'created_at': self.created_at,
             'feature_id': self.feature_id,
             'project_id': self.project_id
