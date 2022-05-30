@@ -18,5 +18,6 @@ class Feature(db.Model):
                 'name': self.name,
                 'project_id': self.project_id,
                 'created_at': self.created_at,
-                'routes': {route.id: route.to_dict() for route in self.routes}
+                'routes': {route.id: route.to_dict() for route in self.routes},
+                'user_stories': {user_story.id: user_story.to_dict() for user_story in self.user_stories}
                 }
