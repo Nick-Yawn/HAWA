@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     role            = db.Column(db.Enum(RoleEnum), nullable=False, default="user")
     last_login      = db.Column(db.DateTime(timezone = True))
+    last_export     = db.Column(db.DateTime(timezone = True))
 
     projects = db.relationship('Project', back_populates='user')
 
@@ -24,6 +25,10 @@ class User(db.Model, UserMixin):
         self.last_login = datetime.now()
         db.session.commit()
 
+    def updateLastExport(self):
+        self.last_export = datetime.now()
+        db.session.commit()
+    
     @property
     def password(self):
         return self.hashed_password
