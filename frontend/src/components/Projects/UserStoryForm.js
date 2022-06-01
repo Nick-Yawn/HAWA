@@ -186,7 +186,7 @@ export function UserStoryForm(props) {
         </div>
       )} 
       
-      { userStory && <button className="facet-button" onClick={handleSubmit}> Submit </button>}
+      <button className="facet-button" onClick={handleSubmit}> Submit </button>
         
     </form>
   );

@@ -93,6 +93,7 @@ export default function FeatureForm(props) {
                       onChange={updateName}
               />
             </div>
+            <button className="facet-button" onClick={handleSubmit}> Submit </button>
           </form>
         )}
 

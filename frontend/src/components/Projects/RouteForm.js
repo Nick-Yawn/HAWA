@@ -258,7 +258,7 @@ export function RouteForm(props) {
         </div>
       )} 
 
-      { route && <button className="facet-button" onClick={handleSubmit}> Submit </button>}
+      <button className="facet-button" onClick={handleSubmit}> Submit </button>
 
     </form>
  );
