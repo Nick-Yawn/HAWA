@@ -204,8 +204,8 @@ export default function ProjectCard(props) {
                       timeout={500}
                       classNames="project-control-buttons">
           <div className="project-card-buttons-container">
-            {/*<button onClick={enterButtonFunc}> Enter </button>*/}
-            <button tabIndex={buttonsActive? "0" : "-1"} onClick={editButtonFunc}> Edit </button>
+            <button onClick={enterButtonFunc}> Enter </button>
+            <button tabIndex={buttonsActive? "0" : "-1"} onClick={editButtonFunc}> Edit Title </button>
             <ConfirmationModal  func={deleteButtonFunc} 
                                 project={project} 
                                 buttonsActive={buttonsActive}>
