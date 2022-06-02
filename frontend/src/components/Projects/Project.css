@@ -15,23 +15,50 @@
   padding: 14px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#sidebar-links-label {
+  color: var(--font-color);
+  font-weight: 300;
+  font-size: 24px;
+  border-bottom: 1px solid var(--font-color);
+  padding: 4px 0px;
+  margin: 10px 0px;
+}
+
+#sidebar-links-label:hover {
+  cursor: default;
 }
 
 .sidebar-link {
-  padding: 8px 0;
+  padding: 10px 0;
   color: var(--font-color);
   font-weight: 300;
   font-size: 18px;
+  text-decoration: none;
 }
 
 .sidebar-link:hover {
-  cursor: default;
+  cursor: pointer;
+}
+
+#export-button {
+  font-size: 30px; 
+  width: 100%;
 }
 
 .project-main {
   height: 100%;
   flex: auto;
+  scroll-behavior: smooth;
 
   display: flex;
   position: relative;

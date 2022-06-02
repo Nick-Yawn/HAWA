@@ -13,7 +13,6 @@ import './Facet.css';
 export default function Feature(props) {
   const { feature,
           links,
-          setLinks,
           aFormActive,
           setAFormActive} = props;
   const dispatch = useDispatch();
@@ -38,15 +37,6 @@ export default function Feature(props) {
 
   const userStories = Object.values(feature.user_stories);
   userStories.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) );
-
-  // add this facet if it exists to sidebar 
-  /*
-  useEffect(()=>{
-    if( feature ) setLinks( prevLinks => { 
-      setLinkIndex(prevLinks.length);
-      return [...prevLinks, feature.name];
-    })
-  },[])*/
 
   useEffect(()=>{
     if( error )
@@ -81,13 +71,7 @@ export default function Feature(props) {
 
   const handleDelete = async e => {
     e.preventDefault();
-    
     await dispatch(deleteFeature(feature?.id));
-
-    setLinks(prevLinks => {
-      prevLinks.splice(linkIndex, 1);
-      return [...prevLinks];
-    })
   }
 
   const handleInputKeyDown = e => {
@@ -126,15 +110,11 @@ export default function Feature(props) {
     }
     await dispatch(editFeature( {id: feature.id, name} ))
     setEditActive(false);
-    setLinks(prevLinks => {
-      prevLinks.splice(linkIndex, 1, name);
-      return [...prevLinks];
-    })
   }
 
 
   return (
-    <div className="facet-container">
+    <div id={`feature-${feature.id}`} className="facet-container">
       <div className="facet-header">
         {editActive ||
           <div className="facet-name" onDoubleClick={handleDoubleClick}>

@@ -35,6 +35,9 @@ nav {
   min-width: max-content;
 }
 
+#project-title:hover {
+  cursor: default;
+}
 .nav-bar-project-title-enter {
   opacity: 0;
 }

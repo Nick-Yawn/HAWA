@@ -9,12 +9,13 @@ import ConversionsModal from './Conversions';
 
 import './Project.css';
 
+
+
 export default function Project({ setProject }) {
   const dispatch = useDispatch();
   const { project_id } = useParams();
   const history = useHistory();
   const project = useSelector( state => state.projects[+project_id] );
-  const [ links, setLinks ] = useState([]);
   const [ showConversions, setShowConversions ] = useState(false);
   const [ aFormActive, setAFormActive ] = useState(false);
   const [ isLoaded, setIsLoaded ] = useState(false);
@@ -51,20 +52,23 @@ export default function Project({ setProject }) {
                     classNames={"project-page"}>
       <div className="sidebar-and-main-container">
         <div className="project-sidebar">
-          {/*links.map(link => 
-            <div className={`sidebar-link ${link.className}`}>{link}</div>
-          )*/}
-          <button onClick={openConversions} className="export-button">Export</button>
+          <div className="sidebar-spacer" />
+          <div className="sidebar-links">
+            <span id="sidebar-links-label">Jump to:</span>
+            {features.map( (feature,i) => (
+              <a href={`#feature-${feature.id}`} key={i} className="sidebar-link">{feature.name}</a>
+            ))} 
+          </div>          
+          <button onClick={openConversions} id="export-button">Export</button>
         </div>
         <div className="project-main" onClick={handleBGClick}>
           { features.map( (feature, i) => (
             <Feature  feature={feature} 
                       aFormActive={aFormActive}
                       key={i}
-                      setAFormActive={setAFormActive}
-                      setLinks={setLinks} />
+                      setAFormActive={setAFormActive}/>
           ))}
-          <FeatureForm  setLinks={setLinks}
+          <FeatureForm
                         setAFormActive={setAFormActive}
                         aFormActive={aFormActive}/>
         </div>
