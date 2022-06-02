@@ -61,7 +61,7 @@ export default function Project({ setProject }) {
           </div>          
           <button onClick={openConversions} id="export-button">Export</button>
         </div>
-        <div className="project-main" onClick={handleBGClick}>
+        <div className="project-main" tabIndex="-1" onClick={handleBGClick}>
           { features.map( (feature, i) => (
             <Feature  feature={feature} 
                       aFormActive={aFormActive}

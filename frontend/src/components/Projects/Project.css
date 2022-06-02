@@ -39,11 +39,12 @@
 }
 
 .sidebar-link {
-  padding: 10px 0;
+  padding: 10px 24px;
   color: var(--font-color);
   font-weight: 300;
   font-size: 18px;
   text-decoration: none;
+  text-align: center;
 }
 
 .sidebar-link:hover {

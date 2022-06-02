@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';import { useParams } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { postRoute, putRoute } from '../../store/projects';
 
@@ -248,7 +247,7 @@ export function RouteForm(props) {
                 value={label}
                 onKeyDown={handleTextInputKeyDown}
                 onChange={updateLabel}
-                placeholder="description"
+                placeholder="description (optional)"
                 className={"facet-input " + (label.length > 255 ? "bad-input" : "")}
         />
       </div>
