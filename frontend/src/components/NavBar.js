@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import { CSSTransition } from 'react-transition-group';
 
 import './NavBar.css'
 
-const NavBar = () => {
+const NavBar = ({ project }) => {
   const user = useSelector(state => state.session?.user) 
 
   return (
@@ -14,11 +15,16 @@ const NavBar = () => {
         <Link to='/' className="navlink">
           <span id="logo">HAWA</span>
         </Link>
+        <div id="nav-bar-left-spacer" />
       </div>
 
+      <CSSTransition  in={project?.title}
+                      timeout={1000}
+                      classNames="nav-bar-project-title">
       <div className="nav-section">
-        <span id="project-title"></span> 
+        <span id="project-title">{project?.title}</span> 
       </div>
+      </CSSTransition>
 
       <div className="nav-bar-right nav-section">
         {!user && (

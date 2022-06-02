@@ -9,9 +9,14 @@ import Splash from './components/Splash';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 
+function ResetProject({setProject}){
+  setProject(null);
+  return null;
+}
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const [project, setProject] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,22 +32,26 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <NavBar project={project}/>
       <Switch>
         <Route path='/' exact={true}>
           <Splash />
+          <ResetProject setProject={setProject} />
         </Route>
         <Route path='/login' exact={true}>
           <LoginSignUpCombo />
+          <ResetProject setProject={setProject} />
         </Route>
         <Route path='/sign-up' exact={true}>
           <LoginSignUpCombo />
+          <ResetProject setProject={setProject} />
         </Route>
         <ProtectedRoute path='/projects' exact={true}>
           <Projects />
+          <ResetProject setProject={setProject} />
         </ProtectedRoute>
         <ProtectedRoute path='/projects/:project_id' exact={true}>
-          <Project />
+          <Project setProject={setProject} />
         </ProtectedRoute>
         <Route path='/project-test'>
           <Project />

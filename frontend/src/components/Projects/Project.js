@@ -9,7 +9,7 @@ import ConversionsModal from './Conversions';
 
 import './Project.css';
 
-export default function Project() {
+export default function Project({ setProject }) {
   const dispatch = useDispatch();
   const { project_id } = useParams();
   const history = useHistory();
@@ -26,7 +26,9 @@ export default function Project() {
     }
     func();
   },[])
- 
+  
+  setProject(project);
+
   const features = Object.values(project?.features || {});
   features.sort( (a,b) => Date.parse(a.created_at) - Date.parse(b.created_at) ); 
 

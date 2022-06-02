@@ -18,10 +18,30 @@ nav {
   margin: 0px 14px;
 }
 
+#nav-bar-left-spacer {
+  width: 45.15px;
+}
+
 #logo {
   font-size: 22px;
   font-weight: 300;
   color: white;
+}
+
+#project-title {
+  font-size: 20px;
+  font-weight: 300;
+  color: white;
+  min-width: max-content;
+}
+
+.nav-bar-project-title-enter {
+  opacity: 0;
+}
+
+.nav-bar-project-title-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms var(--my-cubic-bezier);
 }
 
 a.navlink {
