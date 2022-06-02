@@ -57,6 +57,7 @@ export function RouteForm(props) {
   const [ label, setLabel ]   = useState('');
   const [ error, setError ]   = useState(false);
   const typeRef = useRef(null);
+  const pathRef = useRef(null);
   const id = route?.id;
 
 
@@ -152,7 +153,7 @@ export function RouteForm(props) {
           setPath('/'); 
         }
         setLabel('');
-        typeRef.current.focus();
+        pathRef.current.focus();
       }
     }
   }
@@ -232,6 +233,7 @@ export function RouteForm(props) {
       <div className="facet-resizeable-input-container route-input-container">
         <div className="form-resizer route-path-resizer">{path}</div>
         <input  type="text"
+                ref={pathRef}
                 value={path}
                 onKeyDown={handleTextInputKeyDown}
                 onChange={updatePath}
