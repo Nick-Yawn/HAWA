@@ -9,14 +9,17 @@ export default function FeatureForm(props) {
   const { 
           setLinks,
           aFormActive,
-          setAFormActive} = props;
+          setAFormActive,
+          formLinkActive,
+          setFormLinkActive
+        } = props;
   const dispatch = useDispatch();
   const project_id = +useParams().project_id
   const [ formActive, setFormActive ] = useState(false);
   const [ name, setName ]             = useState('');
   const [ error, setError ]           = useState(false);
   const formRef = useRef(null);
-  
+
   useEffect(()=>{
     if( formActive )
       formRef.current.focus();
@@ -30,6 +33,13 @@ export default function FeatureForm(props) {
     }
   },[aFormActive])
 
+  useEffect(()=>{
+    if( formLinkActive ){
+      setFormActive(true);
+      setAFormActive(true);
+    }
+  },[formLinkActive])
+
   const showForm = e => {
     e.stopPropagation();
     setFormActive(true);
@@ -39,6 +49,7 @@ export default function FeatureForm(props) {
   const handleInputKeyDown = e => {
     if( e.key === "Escape" ){
       setFormActive(false);
+      setFormLinkActive(false);
     }
   }
 
@@ -69,7 +80,7 @@ export default function FeatureForm(props) {
   const stopTheProp = e => e.stopPropagation();
 
   return (
-    <div className="facet-container">
+    <div className="facet-container" id="feature-form">
       <div className="facet-header">
         {formActive || 
           <div  onClick={showForm}

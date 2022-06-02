@@ -175,7 +175,7 @@ export function UserStoryForm(props) {
                 value={story}
                 onKeyDown={handleTextInputKeyDown}
                 onChange={updateStory}
-                placeholder="As a ____, I can ____ so that I can ____"
+                placeholder="As a ____, I can ____, so that ____"
                 className={"facet-input user-story-story-input " + (story.length > 280 ? "bad-input" : "")}
         />
       </div>

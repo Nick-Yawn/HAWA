@@ -19,6 +19,7 @@ export default function Project({ setProject }) {
   const [ showConversions, setShowConversions ] = useState(false);
   const [ aFormActive, setAFormActive ] = useState(false);
   const [ isLoaded, setIsLoaded ] = useState(false);
+  const [ formLinkActive, setFormLinkActive ] = useState(false);
 
   useEffect(()=>{
     const func = async () => {
@@ -39,6 +40,11 @@ export default function Project({ setProject }) {
 
   const handleBGClick = e => {
     setAFormActive(false);
+    setFormLinkActive(false);
+  }
+
+  const updateFormLink = e => {
+    setFormLinkActive(true);
   }
 
   if( isLoaded && project === undefined ){
@@ -58,17 +64,19 @@ export default function Project({ setProject }) {
             {features.map( (feature,i) => (
               <a href={`#feature-${feature.id}`} key={i} className="sidebar-link">{feature.name}</a>
             ))} 
+            <a href="#feature-form" className="sidebar-link" onClick={updateFormLink}>+ Add a Feature</a>
           </div>          
           <button onClick={openConversions} id="export-button">Export</button>
         </div>
-        <div className="project-main" tabIndex="-1" onClick={handleBGClick}>
+        <div className="project-main" onClick={handleBGClick}>
           { features.map( (feature, i) => (
             <Feature  feature={feature} 
                       aFormActive={aFormActive}
                       key={i}
                       setAFormActive={setAFormActive}/>
           ))}
-          <FeatureForm
+          <FeatureForm  formLinkActive={formLinkActive}
+                        setFormLinkActive={setFormLinkActive}
                         setAFormActive={setAFormActive}
                         aFormActive={aFormActive}/>
         </div>
