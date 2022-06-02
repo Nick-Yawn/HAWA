@@ -131,6 +131,7 @@ export function UserStoryForm(props) {
           setStory('');
         setOperation(nextOperation(operation));
         storyRef.current.focus();
+        storyRef.current.scrollIntoView({block:"nearest"});
       }
     }
   }  

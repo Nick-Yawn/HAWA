@@ -154,6 +154,7 @@ export function RouteForm(props) {
         }
         setLabel('');
         pathRef.current.focus();
+        pathRef.current.scrollIntoView({block: "nearest"});
       }
     }
   }
