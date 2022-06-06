@@ -17,6 +17,8 @@ Please feel free to file an issue for bug reports or feature requests. You may a
 
 # How To Use HAWA
 
+[Live Site](https://hawa-beta.herokuapp.com/)
+
 To create a Project, click the "Start a Project" button, type your project name, and press "Enter":
 
 
