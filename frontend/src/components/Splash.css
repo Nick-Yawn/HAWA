@@ -37,8 +37,13 @@
 #tips-and-tricks-link {
   font-size: 28px;
   margin-top: 36px;
+  margin-bottom: 4px;
   color: var(--font-color);
   text-decoration: none;
+}
+
+#tips-and-tricks-link:hover {
+  text-decoration: underline;
 }
 
 .fa-light {

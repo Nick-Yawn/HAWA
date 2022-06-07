@@ -17,7 +17,7 @@ export default function Splash() {
         <span className="splash-text splash-copy">with painless conversion to pre-formatted wiki docs.</span>
         <span className="splash-text splash-copy coming-soon">Acceptance Criteria coming soon!</span>
 
-        <a href="https://youtu.be/wvvC7FZ3_gU" id="tips-and-tricks-link">Tips and Tricks Video
+        <a href="https://youtu.be/wvvC7FZ3_gU" id="tips-and-tricks-link" target="_blank">Tutorial Video
           <i class="fa-light fa-arrow-up-right-from-square"></i>
         </a>
 
