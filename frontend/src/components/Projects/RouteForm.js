@@ -139,7 +139,9 @@ export function RouteForm(props) {
               setPath('/api/');
               break;
             case "POST":
-              setPath('/api/' + path.split('/').at(-1) + '/:id')
+              const segments = path.split('/');
+              const finalSegment = segments[segments.length - 1]
+              setPath('/api/' + finalSegment + '/:id')
               break;
             case "PUT":
             case "PATCH":
