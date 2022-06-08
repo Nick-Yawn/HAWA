@@ -13,11 +13,14 @@ class User(db.Model, UserMixin):
 
     id              = db.Column(db.Integer, primary_key=True)
     name            = db.Column(db.String(40), nullable=False)
-    email           = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
+    email           = db.Column(db.String(255), nullable=True, unique=True)
+    hashed_password = db.Column(db.String(255), nullable=True)
     role            = db.Column(db.Enum(RoleEnum), nullable=False, default="user")
     last_login      = db.Column(db.DateTime(timezone = True))
     last_export     = db.Column(db.DateTime(timezone = True))
+
+    github_id       = db.Column(db.Integer, unique=True)
+
 
     projects = db.relationship('Project', back_populates='user')
 

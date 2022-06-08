@@ -86,6 +86,17 @@ def sign_up():
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
+@auth_routes.route('/github', methods=['GET'])
+def redirect_to_github_login():
+    client_id = os.environ.get('GITHUB_CLIENT_ID')
+    state = secrets.token_urlsafe(64)
+    # Flask uses a signed cookie for session, so this should suffice for CSRF protection
+    session['github_state'] = state
+
+    response = make_response(redirect(f'https://github.com/login/oauth/authorize?client_id={client_id}&state={state}')) 
+
+    return response 
+
 @auth_routes.route('github/callback', methods=['GET'])
 def github_callback():
     print('<<<<<<<<<<<<<<<< github callback >>>>>>>>>>>>>>>>>>')
@@ -107,22 +118,24 @@ def github_callback():
     access_token = r1.json().get('access_token')
 
     r2 = requests.get('https://api.github.com/user', headers={'Authorization': f'token {access_token}'})
-    print(r2.json())
+    github_user = r2.json()
 
-    # TODO: LOGIN
+    github_id = github_user.get('id')
+    name      = github_user.get('name')
+
+    statement = db.select(User).where(User.github_id == github_id)
+    user = db.session.execute(statement).scalar()
+
+    if not user:
+        user = User(name=name, github_id=github_id)
+        db.session.add(user)
+        db.session.commit()
+
+    login_user(user)
+    user.updateLastLogin()
+    print(f'>>>>>>>>>>>>>>>>>>>SUCCESSFUL GITHUB OAUTH FOR {user.name}')
 
     return redirect('/projects')
-
-@auth_routes.route('/github', methods=['GET'])
-def redirect_to_github_login():
-    client_id = os.environ.get('GITHUB_CLIENT_ID')
-    state = secrets.token_urlsafe(64)
-    # Flask uses a signed cookie for session, so this should suffice for CSRF protection
-    session['github_state'] = state
-
-    response = make_response(redirect(f'https://github.com/login/oauth/authorize?client_id={client_id}&state={state}')) 
-
-    return response 
 
 
 @auth_routes.route('/unauthorized')
