@@ -1,8 +1,11 @@
-from flask import Blueprint, jsonify, session, request
+from flask import Blueprint, jsonify, session, request, redirect
 from backend.models import User, db
 from backend.forms import LoginForm
 from backend.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+import os
+import secrets
+import requests
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -82,6 +85,45 @@ def sign_up():
         user.updateLastLogin()
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@auth_routes.route('github/callback', methods=['GET'])
+def github_callback():
+    print('<<<<<<<<<<<<<<<< github callback >>>>>>>>>>>>>>>>>>')
+    state = session.get('github_state')
+    param_state = request.args.get('state') 
+    print('state:', state)
+    print('param_state:', param_state)
+#    if state != param_state:
+ #       return {'errors': "Invalid CSRF Token"}, 403
+
+    code = request.args.get('code')
+    client_id = os.environ.get('GITHUB_CLIENT_ID')
+    client_secret = os.environ.get('GITHUB_SECRET')
+    url = (f'https://github.com/login/oauth/access_token?'
+            f'client_id={client_id}&'
+            f'client_secret={client_secret}&'
+            f'code={code}')
+    headers = {'Accept':'application/json'}
+    print('r1 url:', url)
+    r1 = requests.post(url, headers=headers) 
+    access_token = r1.json().get('access_token')
+    print('access_token:', access_token)
+
+    r2 = requests.get('https://api.github.com/user', headers={'Authorization': f'token {access_token}'})
+    print(r2.json())
+
+    # TODO: LOGIN
+
+    return redirect('/login')
+
+@auth_routes.route('/github', methods=['GET'])
+def redirect_to_github_login():
+    client_id = os.environ.get('GITHUB_CLIENT_ID')
+    state = secrets.token_urlsafe(64)
+    print('outbound state:', state);
+    # Flask uses a signed cookie for session, so this should suffice for CSRF protection
+    session['github_state'] = state 
+    return redirect(f'https://github.com/login/oauth/authorize?client_id={client_id}&state={state}') 
 
 
 @auth_routes.route('/unauthorized')

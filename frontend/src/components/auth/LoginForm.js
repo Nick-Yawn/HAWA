@@ -37,6 +37,7 @@ const LoginForm = () => {
       <div className="login-form-and-demo-panel"> 
         <div className="flex-spacer" />
         <DemoUserPanel />
+        <a href="/api/auth/github"> GITHUB OUATH</a>
         <form className="login-form" onSubmit={onLogin}>
           <div className="login-title">Login</div>
           <div className="login-errors">
