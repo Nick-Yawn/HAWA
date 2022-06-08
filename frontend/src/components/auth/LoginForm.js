@@ -37,7 +37,10 @@ const LoginForm = () => {
       <div className="login-form-and-demo-panel"> 
         <div className="flex-spacer" />
         <DemoUserPanel />
-        <a href="/api/auth/github"> GITHUB OUATH</a>
+        <a href="/api/auth/github" id="github-oauth-button"> 
+          Sign in with GitHub
+          <i class="fa-brands fa-github"></i>
+        </a>
         <form className="login-form" onSubmit={onLogin}>
           <div className="login-title">Login</div>
           <div className="login-errors">

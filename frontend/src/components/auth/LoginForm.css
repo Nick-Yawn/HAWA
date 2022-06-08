@@ -18,7 +18,29 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   gap: 28px;
+}
+
+#github-oauth-button {
+  background-color: #211F1F;
+  border-radius: 8px;
+  padding: 14px;
+  width: 250px;
+  text-align: center;
+  color: var(--font-color);
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 300;
+  border: 1px solid black;
+}
+
+#github-oauth-button:hover {
+  border: 1px solid cyan;
+}
+
+#github-oauth-button > i {
+  padding-left: 8px;
 }
 
 .login-form {
