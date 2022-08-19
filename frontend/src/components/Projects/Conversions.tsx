@@ -1,10 +1,10 @@
 import { useParams, useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import './Project.css';
 import './Conversions.css';
 
-export default function ConversionsModal(props) {
+export default function ConversionsModal(props: { project_id: number, showConversions: boolean, setShowConversions: (bool: boolean) => void }) {
   const { 
           project_id,
           showConversions,
@@ -14,7 +14,7 @@ export default function ConversionsModal(props) {
   const [ loaded, setLoaded ] = useState(false);
   const [ conversions, setConversions ] = useState([]);
 
-  const getConversions = async e => {
+  const getConversions = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const response = await fetch(`/api/projects/${project_id}/conversions`);
     const data = await response.json();
 
@@ -22,13 +22,13 @@ export default function ConversionsModal(props) {
     setLoaded(true);
   }
 
-  const copyToClipboard = e => {
+  const copyToClipboard = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigator.clipboard.writeText(conversions[0])
   }
 
-  const hideModal = e => setShowConversions(false);
-  const redirectToProject = e => history.push(`/projects/${project_id}`);
-  const stopTheProp = e => e.stopPropagation();
+  const hideModal = (e: React.MouseEvent<HTMLDivElement>) => setShowConversions(false);
+  //const redirectToProject = e => history.push(`/projects/${project_id}`);
+  const stopTheProp = (e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation();
 
   return (
     <div  className="conversions-background" 
@@ -46,10 +46,19 @@ export default function ConversionsModal(props) {
   );
 }
 
-function Conversion({ conversion }){
+interface ConversionObj {
+  output: string;
+  name: string;
+}
+
+interface Props {
+  conversion: ConversionObj
+}
+
+function Conversion( { conversion }: Props ){
   const [ copied, setCopied ] = useState(false);
      
-  const copyToClipboard = e => {
+  const copyToClipboard = (e: React.MouseEvent<HTMLButtonElement> ) => {
     navigator.clipboard.writeText(conversion.output);
     setCopied(true);
     setTimeout(()=>setCopied(false), 1500)
